@@ -3,6 +3,7 @@
     <div class="nav">
       <ul class="location">
         <li>
+          <span style="font-size:28px;">物资采购管理系统</span>
           <!-- <Dropdown  placement="bottom-start">
             <a href="javascript:void(0)">
               <Icon type="ios-location" class="icon"></Icon> {{city}}
@@ -59,12 +60,13 @@
 </template>
 
 <script>
+import Cookies from "js-cookie";
 export default {
   name: "M-Header",
   created() {
     this.loginUrl =
       "/login?url=" + window.btoa(window.encodeURIComponent(location.href));
-    this.userInfo = JSON.parse(localStorage.getItem("loginInfo"));
+    this.userInfo = JSON.parse(Cookies.get("user"));
   },
   data() {
     return {
@@ -82,7 +84,7 @@ export default {
     "$route.name"(val) {
       this.loginUrl =
         "/login?url=" + window.btoa(window.encodeURIComponent(location.href));
-      this.userInfo = JSON.parse(localStorage.getItem("loginInfo"));
+      this.userInfo = JSON.parse(Cookies.get("user"));
     }
   }
 };
@@ -91,8 +93,8 @@ export default {
 <style scoped>
 .box {
   width: 100%;
-  height: 35px;
-  background-color: #e3e4e5;
+  height: 50px;
+  background-color: #33bbff;
   position: fixed;
   /* max-width: 1200px; */
   z-index: 999;
@@ -112,13 +114,13 @@ export default {
 .nav li {
   float: left;
   font-size: 14px;
-  line-height: 35px;
+  line-height: 50px;
   margin-right: 15px;
   font-weight: bold;
 }
 .nav a {
   text-decoration: none;
-  color: #999999;
+  color: #fff;
   padding-left: 15px;
   border-left: 1px solid #ccc;
   cursor: pointer;
@@ -130,13 +132,13 @@ export default {
   color: #d9534f;
 }
 .location {
-  color: #999999;
+  color: #fff;
 }
 .icon {
   color: #d9534f;
 }
 .first {
-  color: #999999;
+  color: #fff;
 }
 .first a:first-child {
   padding-left: 3px;
@@ -158,7 +160,7 @@ export default {
   background-color: #f0cdb2;
 }
 .username {
-  color: #999999;
+  color: #fff;
 }
 .shopping-cart-list {
   padding: 3px 15px;
@@ -192,7 +194,7 @@ export default {
   overflow: hidden;
   font-size: 12px;
   line-height: 20px;
-  color: #999999;
+  color: #fff;
 }
 .shopping-cart-detail {
   color: #999999;

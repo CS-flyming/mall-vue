@@ -47,3 +47,6 @@ export function getOrderDetail(id) {
 export function takeProduct(id) {
   return $axios.post(`/product/take/${id}`);
 }
+export function editProNum(params) {
+  return $axios.post("product/car/edit", params);
+}

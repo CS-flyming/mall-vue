@@ -148,7 +148,7 @@ export default {
       this.buyInfo.productId = this.pData.id;
       addToCart(this.buyInfo).then(res => {
         let _this = this;
-        this.$Modal.success({
+        this.$Modal.confirm({
           title: "提示",
           content: "添加购物车成功",
           onOk() {

@@ -88,7 +88,7 @@
       <div class="nav-content">
         <!-- 幻灯片 -->
         <div>
-          <Carousel loop :height="560" style="width:100%;">
+          <Carousel loop autoplay :height="560" style="width:985px;">
               <CarouselItem  v-for="(item, index) in marketing.CarouselItems" :key="index">
                 <!-- <router-link to="/goodsList"> -->
                   <img :src="item" style="width:100%;height:100%;">
@@ -285,9 +285,9 @@ export default {
   height: 100%;
   min-height: 560px;
   padding: 0px;
-  color: #fff;
+  color: #888;
   float: left;
-  background-color: #6e6568;
+  background-color: #fff;
 }
 .nav-side ul {
   width: 100%;
@@ -302,7 +302,7 @@ export default {
   line-height: 18px;
 }
 .nav-side li:hover {
-  background: #999395;
+  background: #f6f6f6;
 }
 .nav-side-item:hover {
   cursor: pointer;
@@ -335,7 +335,7 @@ export default {
   width: 1000px;
   height: 560px;
   min-height: 560px;
-  background-color: #fff;
+  background-color: #ffffff;
   border: 1px solid #f6f6f6;
   position: absolute;
   top: 168px;
@@ -372,7 +372,7 @@ export default {
   font-weight: bold;
   font-size: 12px;
   cursor: pointer;
-  color: #555555;
+  color: #888;
 }
 .detail-item-title:hover {
   color: #d9534f;

@@ -3,6 +3,7 @@ import iView from "iview";
 import qs from "qs";
 import Vue from "vue";
 export const ApiUrl = "http://106.14.180.49:9009";
+import Cookies from "js-cookie";
 axios.defaults.baseURL = ApiUrl;
 // axios.defaults.withCredentials = true;
 axios.defaults.transformRequest = [
@@ -12,8 +13,8 @@ axios.defaults.transformRequest = [
   }
 ];
 axios.interceptors.request.use(config => {
-  if (localStorage.getItem("token")) {
-    config.headers.common["X-USERTOKEN"] = localStorage.getItem("token");
+  if (Cookies.get("token")) {
+    config.headers.common["X-USERTOKEN"] = Cookies.get("token");
   }
   if (config.method === "post" || config.method === "put") {
     if (config.data) {

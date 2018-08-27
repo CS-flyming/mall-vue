@@ -92,7 +92,8 @@ import {
   getCartList,
   addNoNormalOrder,
   addNormalOrder,
-  deleteCartById
+  deleteCartById,
+  editProNum
 } from "@/actions/index";
 export default {
   name: "MyShoppingCart",
@@ -210,8 +211,26 @@ export default {
         },
         {
           title: "数量",
-          key: "num",
-          align: "center"
+          // key: "num",
+          align: "center",
+          render: (h, params) => {
+            return h("InputNumber", {
+              props: {
+                min: 1,
+                value: params.row.num
+              },
+              on: {
+                "on-change": val => {
+                  editProNum({
+                    id: params.row.id,
+                    num: val
+                  }).then(res => {
+                    this.loadShoppingCart();
+                  });
+                }
+              }
+            });
+          }
         },
         {
           title: "经费类型",
@@ -235,7 +254,7 @@ export default {
                   on: {
                     "on-ok": () => {
                       deleteCartById(params.row.id).then(res => {
-                        this.$lf.message("删除成功", "success");
+                        this.$Message.success("删除成功");
                         this.loadShoppingCart();
                       });
                     }

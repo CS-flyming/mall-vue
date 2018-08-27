@@ -37,6 +37,7 @@
 <script>
 import Footer from "@/components/footer/Footer";
 import { login } from "@/actions/index";
+import Cookies from "js-cookie";
 export default {
   name: "Login",
   data() {
@@ -67,8 +68,8 @@ export default {
       this.$refs[name].validate(valid => {
         if (valid) {
           login(father.formDate).then(res => {
-            localStorage.setItem("loginInfo", JSON.stringify(res.data));
-            localStorage.setItem("token", res.data.token);
+            Cookies.set("user", JSON.stringify(res.data));
+            Cookies.set("token", res.data.token);
             this.$Message.success("登陆成功");
             window.location.href = window.decodeURIComponent(
               window.atob(this.$route.query.url)

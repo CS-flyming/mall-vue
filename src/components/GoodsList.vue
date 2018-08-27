@@ -49,8 +49,9 @@
           <div class="goods-list">
             <template v-if="orderGoodsList.length">
                 <div class="goods-show-info" v-for="(item, index) in orderGoodsList" :key="index">
+                  <router-link :to="{path:'/goodsDetail',query:{id:item.id,prcode:query.prcode,prname:query.prname}}">
                   <div class="goods-show-img">
-                    <router-link :to="{path:'/goodsDetail',query:{id:item.id,prcode:query.prcode,prname:query.prname}}"><img v-lazy="item.file&&item.file.url+'?type=small'"/></router-link>
+                    <img v-lazy="item.file&&item.file.url+'?type=small'"/>
                   </div>
                   <div class="goods-show-price">
                     <span>
@@ -67,6 +68,7 @@
                   <div class="goods-show-seller">
                     <span>{{item.shopName}}</span>
                   </div> -->
+                  </router-link>
                 </div>
             </template>
            

@@ -13,7 +13,7 @@
         <ul>
           <template v-for="(item, index) in navSideArr">
               <li :key="index" @mouseenter="showDetail(index)" @mouseleave="hideDetail(index)">
-                <span class="nav-side-item">{{item.name}}</span>
+                <span class="nav-side-item"  v-html="item.name"></span>
               </li>
           </template>
           
@@ -296,10 +296,10 @@ export default {
   list-style: none;
 }
 .nav-side li {
-  padding: 7.5px;
-  padding-left: 15px;
-  font-size: 14px;
-  line-height: 18px;
+  padding: 8px;
+  padding-left: 25px;
+  font-size: 17px;
+  line-height: 26px;
 }
 .nav-side li:hover {
   background: #f6f6f6;

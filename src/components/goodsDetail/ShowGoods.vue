@@ -120,7 +120,7 @@ export default {
       imgIndex: 0,
       buyInfo: {
         productId: "",
-        type: "5",
+        type: "6",
         num: 1,
         value: 0
       },

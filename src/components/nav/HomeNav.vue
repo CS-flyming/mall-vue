@@ -117,7 +117,7 @@
                 <template v-if="it.nodes&&it.nodes.length">
                   
                     <li v-for="(items, index) in it.nodes" :key="index" class="detail-item-row">
-                      <Col span="2">
+                      <Col span="4">
                       <router-link :to="'/goodsList?prcode='+items.id+'&prname='+items.name">
                         <span class="detail-item-title">{{items.name}}
                           <span class="glyphicon glyphicon-menu-right"></span>
@@ -369,8 +369,8 @@ export default {
 }
 .detail-item-title {
   padding-right: 6px;
-  font-weight: bold;
-  font-size: 12px;
+  font-weight: 400;
+  font-size: 14px;
   cursor: pointer;
   color: #888;
 }

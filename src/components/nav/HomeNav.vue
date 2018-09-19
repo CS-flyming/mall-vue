@@ -88,12 +88,11 @@
       <div class="nav-content">
         <!-- 幻灯片 -->
         <div>
-          <Carousel loop autoplay :height="560" style="width:985px;">
-              <CarouselItem  v-for="(item, index) in marketing.CarouselItems" :key="index">
-                <!-- <router-link to="/goodsList"> -->
-                  <img :src="item" style="width:100%;height:100%;">
+          <Carousel arrow="never" :height="560" style="width:985px;">
+              <CarouselItem >
+                <!-- <router-link to="/goodsList">-->
+                  <img src="/static/bg.png" style="width:100%;height:100%;">
                 <!-- </router-link> -->
-            
               </CarouselItem>
           </Carousel>
         </div>
@@ -156,6 +155,10 @@
       </div>
     </transition> -->
     <div class="seckill-content">
+        <div class="gg-container">
+          公告
+        </div>
+        <div class="hot-container">
               <div class="seckill-item" v-for="(item2, index2) in testArr" :key="index2">
                 <router-link :to="'/goodsDetail?id='+item2.id+'&prcode='+item2.type+'&prname='+item2.typeDesc">
                 <div class="seckill-item-img">
@@ -174,6 +177,7 @@
                 </router-link>
               </div>
             </div>
+        </div>
   </div>
 </template>
 
@@ -470,6 +474,13 @@ export default {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+}
+.gg-container {
+  flex: 1;
+  padding: 10px;
+}
+.hot-container {
+  flex: 0 0 800px;
 }
 .seckill-item {
   width: 183px;

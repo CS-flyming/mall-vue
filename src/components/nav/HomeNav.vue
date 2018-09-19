@@ -372,7 +372,7 @@ export default {
   font-weight: 400;
   font-size: 14px;
   cursor: pointer;
-  color: #888;
+  color: #181818;
 }
 .detail-item-title:hover {
   color: #d9534f;

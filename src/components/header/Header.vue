@@ -3,7 +3,7 @@
     <div class="nav">
       <ul class="location">
         <li>
-          <span style="font-size:28px;">物资采购管理系统</span>
+          <span style="font-size:28px;">{{nowDate}}</span>
           <!-- <Dropdown  placement="bottom-start">
             <a href="javascript:void(0)">
               <Icon type="ios-location" class="icon"></Icon> {{city}}
@@ -67,17 +67,37 @@ export default {
     this.loginUrl =
       "/login?url=" + window.btoa(window.encodeURIComponent(location.href));
     this.userInfo = JSON.parse(Cookies.get("user"));
+    this.nowDate = this.formatDate();
   },
   data() {
     return {
       loginUrl: "/login",
-      userInfo: ""
+      userInfo: "",
+      nowDate: ""
     };
   },
   methods: {
     signOutFun() {
       localStorage.clear();
       window.location.reload();
+    },
+    formatDate(time) {
+      var date = time ? new Date(time) : new Date();
+      let weekday = [
+        "星期日",
+        "星期一",
+        "星期二",
+        "星期三",
+        "星期四",
+        "星期五",
+        "星期六"
+      ];
+      var year = date.getFullYear(),
+        month = date.getMonth() + 1, //月份是从0开始的
+        day = date.getDate(),
+        xq = date.getDay();
+      var newTime = year + "年" + month + "月" + day + "日  " + weekday[xq];
+      return newTime;
     }
   },
   watch: {

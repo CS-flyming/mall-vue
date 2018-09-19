@@ -157,39 +157,38 @@
     <div class="seckill-content">
         <div class="gg-container">
           公告
+          <div  v-for="(item3, index3) in ggArr" :key="index3">
+                     <p>{{item3.name}}</p>
+                   
+                </div>
+               
         </div>
         <div class="hot-container">
-              <div class="seckill-item" v-for="(item2, index2) in testArr" :key="index2">
-                <router-link :to="'/goodsDetail?id='+item2.id+'&prcode='+item2.type+'&prname='+item2.typeDesc">
-                <div class="seckill-item-img">
-                  <img v-lazy="item2.file&&item2.file.url+'?type=small'">
+              热销商品
+              <div  v-for="(item2, index2) in testArr" :key="index2">
+                <!-- <router-link :to="'/goodsDetail?id='+item2.id+'&prcode='+item2.type+'&prname='+item2.typeDesc">
+                
+                <div class="seckill-item-info"> -->
+                  <p>{{item2.name}}  {{item2.num}}</p>
+                   
                 </div>
-                <div class="seckill-item-info">
-                  <p style="height: 20px;
-    line-height: 20px;
-    overflow: hidden;
-    word-break: break-all;">{{item2.name}}</p>
-                  <p>
-                    <span class="seckill-price text-danger"><Icon type="social-yen"></Icon>{{item2.value}}</span>
-                    <!-- <span class="seckill-old-price"><s>{{item2.value}}</s></span> -->
-                  </p>
-                </div>
-                </router-link>
+               
               </div>
             </div>
         </div>
-  </div>
+  
 </template>
 
 <script>
 import store from "@/vuex/store";
 import { mapState } from "vuex";
-import { getProductListType, getProductList } from "@/actions/index";
+import { getProductListType, getProductList,getProductHot,getGgList} from "@/actions/index";
 export default {
   name: "HomeNav",
   data() {
     return {
       testArr: [],
+      ggArr: [],
       panel1: false,
       panel2: false,
       panelActive: "",
@@ -203,16 +202,24 @@ export default {
     showDetail(index) {
       this.panelActive = index;
     },
+     getGgList() {
+      getGgList().then(res => {
+        this.ggArr = res.data.rows;
+      });
+    },
     hideDetail(index) {
       this.panelActive = "";
       // index === 1 ? (this.panel1 = false) : (this.panel2 = false);
     },
-    getProductList() {
-      getProductList().then(res => {
-        this.testArr = res.data.rows;
+    getProductHot() {
+      //debugger;
+      getProductHot().then(res => {
+        this.testArr = res.data;
       });
     }
   },
+
+  
   created() {
     getProductListType().then(res => {
       this.navSideArr = res.data;
@@ -230,7 +237,8 @@ export default {
         });
       });
     });
-    this.getProductList();
+    this.getProductHot();
+    this.getGgList();
   },
   mounted() {},
   updated() {

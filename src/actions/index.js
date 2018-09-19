@@ -8,6 +8,14 @@ export function getProductList(params) {
   return $axios.post("/product/list", params);
 }
 
+export function getProductHot() {
+  return $axios.post("/product/hot");
+}
+
+export function getGgList() {
+  return $axios.post("/notice/list");
+}
+
 export function getProductDetail(id) {
   return $axios.post(`product/find/${id}`);
 }

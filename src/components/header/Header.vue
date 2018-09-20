@@ -66,7 +66,7 @@ export default {
   created() {
     this.loginUrl =
       "/login?url=" + window.btoa(window.encodeURIComponent(location.href));
-    this.userInfo = JSON.parse(Cookies.get("user"));
+    this.userInfo = Cookies.get("user") && JSON.parse(Cookies.get("user"));
     this.nowDate = this.formatDate();
   },
   data() {
@@ -104,7 +104,7 @@ export default {
     "$route.name"(val) {
       this.loginUrl =
         "/login?url=" + window.btoa(window.encodeURIComponent(location.href));
-      this.userInfo = JSON.parse(Cookies.get("user"));
+      this.userInfo = Cookies.get("user") && JSON.parse(Cookies.get("user"));
     }
   }
 };

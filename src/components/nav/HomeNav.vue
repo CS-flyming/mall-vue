@@ -13,7 +13,7 @@
         <ul>
           <template v-for="(item, index) in navSideArr">
               <li :key="index" @mouseenter="showDetail(index)" @mouseleave="hideDetail(index)">
-                <span class="nav-side-item"  v-html="item.name"></span>
+                <span class="nav-side-item">{{item.name}}</span>
               </li>
           </template>
           
@@ -112,26 +112,39 @@
               <span v-for="(item, index) in panelData1.navTags" :key="index">{{item}} > </span>
             </div> -->
             <ul style="padding-top:15px;">
-              <Row>
+              
                 <template v-if="it.nodes&&it.nodes.length">
                   
                     <li v-for="(items, index) in it.nodes" :key="index" class="detail-item-row">
-                      <Col span="4">
-                      <router-link :to="'/goodsList?prcode='+items.id+'&prname='+items.name">
-                        <span class="detail-item-title">{{items.name}}
-                          <span class="glyphicon glyphicon-menu-right"></span>
-                        </span>
-                      </router-link>
-                      <!-- <router-link to="/goodsList" v-for="(item, subIndex) in items.nodes" :key="subIndex">
-                        <span class="detail-item">{{item.name}}</span>
-                      </router-link> -->
-                      </Col>
+                      <Row>
+                        <Col span="2">
+                          <!-- <router-link :to="'/goodsList?prcode='+items.id+'&prname='+items.name"> -->
+                            <span class="detail-item-title" style="font-weight:700;">{{items.name}}
+                              <span class="glyphicon glyphicon-menu-right"></span>
+                            </span>
+                          <!-- </router-link> -->
+                        </Col>
+                        <Col span="20">
+                          <Row>
+                            <li v-for="(items2) in items.nodes" :key="items2.id" class="detail-item-row">
+                              
+                                <Col span="4">
+                                  <router-link :to="'/goodsList?prcode='+items2.id+'&prname='+items2.name">
+                                    <span class="detail-item-title">{{items2.name}}
+                                      <span class="glyphicon glyphicon-menu-right"></span>
+                                    </span>
+                                  </router-link>
+                                </Col>
+                            </li>
+                          </Row>
+                        </Col>
+                       </Row>
                     </li>
                 </template>
                 <template v-else>
                   <li>暂无分类</li>
                 </template>
-              </Row>
+             
             </ul>
           </div>
         </transition>
@@ -157,9 +170,9 @@
     <div class="seckill-content">
         <div class="gg-container">
           公告
-          <div  v-for="(item3, index3) in ggArr" :key="index3">
-                     <p>{{item3.name}}</p>
-                   
+          
+          <div  v-for="(item3, index3) in ggArr" :key="index3" class="detail-item-li">
+                     <p>{{item3.name}}</p>                   
                 </div>
                
         </div>
@@ -182,7 +195,12 @@
 <script>
 import store from "@/vuex/store";
 import { mapState } from "vuex";
-import { getProductListType, getProductList,getProductHot,getGgList} from "@/actions/index";
+import {
+  getPro,
+  getProductList,
+  getProductHot,
+  getGgList
+} from "@/actions/index";
 export default {
   name: "HomeNav",
   data() {
@@ -202,7 +220,7 @@ export default {
     showDetail(index) {
       this.panelActive = index;
     },
-     getGgList() {
+    getGgList() {
       getGgList().then(res => {
         this.ggArr = res.data.rows;
       });
@@ -219,9 +237,8 @@ export default {
     }
   },
 
-  
   created() {
-    getProductListType().then(res => {
+    getPro().then(res => {
       this.navSideArr = res.data;
       this.$nextTick(() => {
         this.navSideArr.map((v, index) => {
@@ -312,6 +329,7 @@ export default {
   padding-left: 25px;
   font-size: 17px;
   line-height: 26px;
+  white-space:pre;
 }
 .nav-side li:hover {
   background: #f6f6f6;

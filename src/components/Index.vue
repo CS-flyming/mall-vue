@@ -4,8 +4,17 @@
       <img src="/static/kj.png" width="100%" alt="">
     </div>
     <Sreach></Sreach>
-    <div class="logo-img">
-      <img src="/static/dh.png" width="100%" alt="">
+    <div style="height:49px;">
+     <ul>
+  <li><a href="#home">全部商品分类</a></li>
+  <li><a href="#notice">通知公告</a></li>
+  <li><a href="#zcfg">政策法规</a></li>
+  <li><a href="#syzn">使用指南</a></li>
+  <li><a href="#home">供应商名录</a></li>
+  <li><a href="#abc">内容待定</a></li>
+  <li><a href="#edf">内容待定</a></li>
+  
+</ul>
     </div>
     <HomeNav></HomeNav>
     <!-- 商品显示区域 -->
@@ -199,6 +208,28 @@ export default {
   margin: 15px auto;
   background-color: #fff;
 }
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #009688;
+}
+
+li {
+    float: left;
+  
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 12px 50px;
+    text-decoration: none;
+    font-size:16px;
+}
+
 .seckill-head {
   width: 100%;
   height: 50px;

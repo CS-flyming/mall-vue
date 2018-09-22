@@ -13,7 +13,7 @@
         <ul>
           <template v-for="(item, index) in navSideArr">
               <li :key="index" @mouseenter="showDetail(index)" @mouseleave="hideDetail(index)">
-                <span class="nav-side-item"  v-html="item.name"></span>
+                <span class="nav-side-item">{{item.name}}</span>
               </li>
           </template>
           
@@ -170,9 +170,9 @@
     <div class="seckill-content">
         <div class="gg-container">
           公告
-          <div  v-for="(item3, index3) in ggArr" :key="index3">
-                     <p>{{item3.name}}</p>
-                   
+          
+          <div  v-for="(item3, index3) in ggArr" :key="index3" class="detail-item-li">
+                     <p>{{item3.name}}</p>                   
                 </div>
                
         </div>
@@ -196,7 +196,7 @@
 import store from "@/vuex/store";
 import { mapState } from "vuex";
 import {
-  getProductListType,
+  getPro,
   getProductList,
   getProductHot,
   getGgList
@@ -238,7 +238,7 @@ export default {
   },
 
   created() {
-    getProductListType().then(res => {
+    getPro().then(res => {
       this.navSideArr = res.data;
       this.$nextTick(() => {
         this.navSideArr.map((v, index) => {
@@ -329,6 +329,7 @@ export default {
   padding-left: 25px;
   font-size: 17px;
   line-height: 26px;
+  white-space:pre;
 }
 .nav-side li:hover {
   background: #f6f6f6;

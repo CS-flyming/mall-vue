@@ -4,6 +4,9 @@
       <img src="/static/kj.png" width="100%" alt="">
     </div>
     <Sreach></Sreach>
+    <div class="logo-img">
+      <img src="/static/dh.png" width="100%" alt="">
+    </div>
     <HomeNav></HomeNav>
     <!-- 商品显示区域 -->
     <!-- <div class="content"> -->

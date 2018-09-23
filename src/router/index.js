@@ -24,7 +24,8 @@ const MyOrder = resolve => require(["@/components/home/MyOrder"], resolve);
 const MyShoppingCart = resolve =>
   require(["@/components/home/MyShoppingCart"], resolve);
 const Merchant = resolve => require(["@/components/Merchant"], resolve);
-
+const NoticeDetail = resolve => require(["@/components/NoticeDetail"], resolve);
+const NoticesList = resolve => require(["@/components/NoticesList"], resolve);
 Vue.use(Router);
 
 export default new Router({
@@ -48,6 +49,16 @@ export default new Router({
       path: "/goodsDetail", // 商品详情
       name: "GoodsDetail",
       component: GoodsDetail
+    },
+    {
+      path: "/notice-detail", // 商品详情
+      name: "NoticeDetail",
+      component: NoticeDetail
+    },
+    {
+      path: "/noticesList", // 商品列表
+      name: "NoticesList",
+      component: NoticesList
     },
     {
       path: "/shoppingCart", // 商品详情

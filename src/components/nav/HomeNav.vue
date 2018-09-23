@@ -169,23 +169,41 @@
     </transition> -->
     <div class="seckill-content">
         <div class="gg-container">
-          公告
-          
-          <div  v-for="(item3, index3) in ggArr" :key="index3" class="detail-item-li">
-                     <p>{{item3.name}}</p>                   
-                </div>
-               
+          <Card style="width:350px">
+            <p slot="title">
+                <Icon type="android-notifications-none"></Icon>
+                公告
+            </p>
+             <a href="#" slot="extra" @click.prevent="getMoreNotice">
+                查看更多
+               <Icon type="arrow-right-a"></Icon>
+            </a>
+            <Row>
+              <Col span="24" v-for="(item3, index3) in ggArr" :key="index3" style="padding:5px;">
+                     <router-link style="text-decoration: underline;" :to="'/notice-detail?nid='+item3.id+'&nname='+item3.name" >{{item3.name}}</router-link>
+              </Col>
+            </Row>
+          </Card>
+         
         </div>
         <div class="hot-container">
-              热销商品
-              <div  v-for="(item2, index2) in testArr" :key="index2">
-                <!-- <router-link :to="'/goodsDetail?id='+item2.id+'&prcode='+item2.type+'&prname='+item2.typeDesc">
-                
-                <div class="seckill-item-info"> -->
-                  <p>{{item2.name}}  {{item2.num}}</p>
-                   
-                </div>
-               
+              <Card >
+                <p slot="title">
+                    <Icon type="android-notifications-none"></Icon>
+                    热销商品
+                </p>
+                <Row>
+                  <Col span="24" v-for="(item2, index2) in testArr" :key="index2" style="padding:5px;">
+                         
+                        <router-link style="color:#666;"  :to="{path:'/goodsDetail',query:{id:item2.productId,prcode:item2.code,prname:item2.name}}">
+                          <Row>
+                            <Col span="20">{{item2.name}}</Col>
+                            <Col span="4" style="color:#57a3f3;"><Icon type="android-star-outline"></Icon>{{item2.num}}</Col>
+                          </Row>
+                        </router-link>
+                  </Col>
+                </Row>
+              </Card>      
               </div>
             </div>
         </div>
@@ -217,6 +235,11 @@ export default {
     ...mapState(["marketing"])
   },
   methods: {
+    getMoreNotice() {
+      this.$router.push({
+        name: "NoticesList"
+      });
+    },
     showDetail(index) {
       this.panelActive = index;
     },
@@ -329,7 +352,7 @@ export default {
   padding-left: 25px;
   font-size: 17px;
   line-height: 26px;
-  white-space:pre;
+  white-space: pre;
 }
 .nav-side li:hover {
   background: #f6f6f6;

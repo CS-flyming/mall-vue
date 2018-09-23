@@ -2,13 +2,13 @@ import axios from "axios";
 import iView from "iview";
 import qs from "qs";
 import Vue from "vue";
-//export const ApiUrl = "http://106.14.180.49:9008";
-export const ApiUrl = "http://127.0.0.1:8081";
+// export const ApiUrl = "http://106.14.180.49:9008";
+export const ApiUrl = "http://192.168.0.105:9001";
 import Cookies from "js-cookie";
 axios.defaults.baseURL = ApiUrl;
 // axios.defaults.withCredentials = true;
 axios.defaults.transformRequest = [
-  function(data) {
+  function (data) {
     data = qs.stringify(data);
     return data;
   }

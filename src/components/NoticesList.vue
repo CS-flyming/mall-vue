@@ -129,6 +129,6 @@ export default {
 }
 .shop-nav-container {
   margin: 0px auto;
-  width: 80%;
+  width: 98%;
 }
 </style>

@@ -169,7 +169,7 @@
     </transition> -->
     <div class="seckill-content">
         <div class="gg-container">
-          <Card style="width:350px">
+          <Card >
             <p slot="title">
                 <Icon type="android-notifications-none"></Icon>
                 公告
@@ -178,7 +178,7 @@
                 查看更多
                <Icon type="arrow-right-a"></Icon>
             </a>
-            <Row>
+            <Row style="min-height: 350px;">
               <Col span="24" v-for="(item3, index3) in ggArr" :key="index3" style="padding:5px;">
                      <router-link style="text-decoration: underline;" :to="'/notice-detail?nid='+item3.id+'&nname='+item3.name" >{{item3.name}}</router-link>
               </Col>
@@ -192,7 +192,7 @@
                     <Icon type="android-notifications-none"></Icon>
                     热销商品
                 </p>
-                <Row>
+                <Row style="min-height: 350px;">
                   <Col span="24" v-for="(item2, index2) in testArr" :key="index2" style="padding:5px;">
                          
                         <router-link style="color:#666;"  :to="{path:'/goodsDetail',query:{id:item2.productId,prcode:item2.code,prname:item2.name}}">
@@ -530,6 +530,7 @@ export default {
 }
 .hot-container {
   flex: 0 0 800px;
+  padding: 10px;
 }
 .seckill-item {
   width: 183px;

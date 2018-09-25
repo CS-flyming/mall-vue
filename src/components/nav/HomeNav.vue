@@ -529,7 +529,7 @@ export default {
   padding: 10px;
 }
 .hot-container {
-  flex: 0 0 800px;
+  flex: 0 0 680px;
   padding: 10px;
 }
 .seckill-item {

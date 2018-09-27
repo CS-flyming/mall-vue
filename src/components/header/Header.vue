@@ -3,7 +3,7 @@
     <div class="nav">
       <ul class="location">
         <li>
-          <span style="font-size:28px;">{{nowDate}}</span>
+          <span style="font-size:14px;">{{nowDate}}</span>
           <!-- <Dropdown  placement="bottom-start">
             <a href="javascript:void(0)">
               <Icon type="ios-location" class="icon"></Icon> {{city}}

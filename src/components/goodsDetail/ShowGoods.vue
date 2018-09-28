@@ -20,6 +20,9 @@
           <p>
             <span >【{{pData.typeDesc}}】</span>
           </p>
+          <p>
+            <span >编号【{{pData.code}}】</span>
+          </p>
         </div>
         <div class="item-detail-price-row">
           <div class="item-price-left">
@@ -28,6 +31,7 @@
                 <span class="item-price-title">价格</span>
                 <span class="item-price">￥{{pData.value&&pData.value.toFixed(2)}}</span>
               </p>
+               
             </div>
             <!-- <div class="item-price-row">
               <p>

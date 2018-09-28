@@ -77,7 +77,7 @@
         <br>
         <div class="add-buy-car-box">
           <div class="add-buy-car">
-            <InputNumber :min="1" v-model="buyInfo.num" size="large"></InputNumber>
+            <span style="font-size: 20px;padding-right: 10px;color: grey;">数量</span><InputNumber :min="1" v-model="buyInfo.num" size="large"></InputNumber>
             <Button type="error" size="large" @click="addShoppingCartBtn()">加入购物车</Button>
           </div>
         </div>

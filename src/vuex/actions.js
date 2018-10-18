@@ -49,18 +49,18 @@ export const loadSeckillsInfo = ({ commit }) => {
 };
 
 // 获取轮播(营销)图片
-export const loadCarouselItems = ({ commit }) => {
-  return new Promise((resolve, reject) => {
-    const data = {
-      carouselItems: ["static/nav1.jpg", "static/nav2.jpg", "static/nav3.jpg"],
-      activity: [
-        "static/img/nav/nav_showimg1.jpg",
-        "static/img/nav/nav_showimg2.jpg"
-      ]
-    };
-    commit("SET_CAROUSELITEMS_INFO", data);
-  });
-};
+// export const loadCarouselItems = ({ commit }) => {
+//   return new Promise((resolve, reject) => {
+//     const data = {
+//       carouselItems: ["static/nav3.jpg"],
+//       activity: [
+//         "static/img/nav/nav_showimg1.jpg",
+//         "static/img/nav/nav_showimg2.jpg"
+//       ]
+//     };
+//     commit("SET_CAROUSELITEMS_INFO", data);
+//   });
+// };
 
 // 加载电脑专栏数据
 export const loadComputer = ({ commit }) => {

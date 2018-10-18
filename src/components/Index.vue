@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="logo-img">
-      <img src="/static/kj.png" width="100%" alt="">
+      <img src="/static/kj.jpg" width="100%" alt="">
     </div>
     <Sreach></Sreach>
     <div style="height:49px;">

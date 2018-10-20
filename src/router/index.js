@@ -24,7 +24,7 @@ const MyOrder = resolve => require(["@/components/home/MyOrder"], resolve);
 const MyShoppingCart = resolve =>
   require(["@/components/home/MyShoppingCart"], resolve);
 const Merchant = resolve => require(["@/components/Merchant"], resolve);
-const NoticeList = resolve => require(["@/components/home/NoticeList"], resolve);
+const NoticeList = resolve => require(["@/components/NoticeList"], resolve);
 
 Vue.use(Router);
 

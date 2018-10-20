@@ -89,7 +89,7 @@
         <!-- 幻灯片 -->
         <div>
           <Carousel loop autoplay :height="560" style="width:985px;">
-              <CarouselItem  v-for="(item, index) in marketing.CarouselItems" :key="index">
+              <CarouselItem  arrow="never" dots="none" v-for="(item, index) in marketing.CarouselItems" :key="index">
                 <!-- <router-link to="/goodsList"> -->
                   <img :src="item" style="width:100%;height:100%;">
                 <!-- </router-link> -->
@@ -106,6 +106,8 @@
         </div> -->
       </div>
     </div>
+
+    
     <template v-for="(it, index) in navSideArr" >
         <transition name="fade" :key="'fd'+index">
           <div class="detail-item-panel panel-1" :duration="{ enter: 100, leave: 100 }" v-show="panelActive===index" @mouseenter="showDetail(index)" :ref="'itemPanel'+index" @mouseleave="hideDetail(index)">

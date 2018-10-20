@@ -88,12 +88,11 @@
       <div class="nav-content">
         <!-- 幻灯片 -->
         <div>
-          <Carousel loop autoplay :height="560" style="width:985px;">
-              <CarouselItem  arrow="never" dots="none" v-for="(item, index) in marketing.CarouselItems" :key="index">
-                <!-- <router-link to="/goodsList"> -->
-                  <img :src="item" style="width:100%;height:100%;">
+          <Carousel arrow="never" dots="none" :height="560" style="width:985px;">
+              <CarouselItem >
+                <!-- <router-link to="/goodsList">-->
+                  <img src="/static/nav3.jpg" style="width:100%;height:100%;">
                 <!-- </router-link> -->
-            
               </CarouselItem>
           </Carousel>
         </div>

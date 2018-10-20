@@ -52,7 +52,7 @@ export const loadSeckillsInfo = ({ commit }) => {
 export const loadCarouselItems = ({ commit }) => {
   return new Promise((resolve, reject) => {
     const data = {
-      carouselItems: ["static/nav1.jpg", "static/nav2.jpg", "static/nav3.jpg"],
+      carouselItems: ["static/nav1.jpg"],
       activity: [
         "static/img/nav/nav_showimg1.jpg",
         "static/img/nav/nav_showimg2.jpg"

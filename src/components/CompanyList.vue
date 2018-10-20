@@ -1,13 +1,10 @@
 <template>
   <div style="padding-top:36px;">
-    <!-- <Sreach></Sreach> -->
-    <!-- <ShopHeader></ShopHeader> -->
-    <!-- <GoodsDetailNav></GoodsDetailNav> -->
     <div class="shop-item-path" style="margin-top: 36px;">
       <div class="shop-nav-container">
         <Breadcrumb>
           <BreadcrumbItem to="/">首页</BreadcrumbItem>
-          <BreadcrumbItem >公告列表</BreadcrumbItem>
+          <BreadcrumbItem >供货商目录</BreadcrumbItem>
         </Breadcrumb>
       </div>
     </div>
@@ -26,14 +23,9 @@ import ShopHeader from "@/components/header/ShopHeader";
 import Footer from "@/components/footer/Footer";
 import ShowGoods from "@/components/goodsDetail/ShowGoods";
 import ShowGoodsDetail from "@/components/goodsDetail/ShowGoodsDetail";
-import { getNoticeList } from "@/actions/index";
+import { companyList } from "@/actions/index";
 import pagination from "@/components/pagination";
 export default {
-  name: "NoticeDetail",
-  beforeRouteEnter(to, from, next) {
-    window.scrollTo(0, 0);
-    next();
-  },
   data() {
     return {
       pData: [],
@@ -46,54 +38,40 @@ export default {
       total: 0,
       columns: [
         {
-          title: "公告标题",
+          title: "供货商名称",
           key: "name"
         },
         {
-          title: "发布时间",
-          key: "createTime"
+          title: "联系人",
+          key: "user"
+        },
+         {
+          title: "地址",
+          key: "address"
+        },
+         {
+          title: "经营范围",
+          key: "width"
         },
         {
-          title: "操作",
-          key: "action",
-          width: 150,
-          align: "center",
-          render: (h, params) => {
-            return h("div", [
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "primary",
-                    size: "small"
-                  },
-                  style: {
-                    marginRight: "5px"
-                  },
-                  on: {
-                    click: () => {
-                      this.$router.push({
-                        path:
-                          "/notice-detail?nid=" +
-                          params.row.id +
-                          "&nname=" +
-                          params.row.name
-                      });
-                    }
-                  }
-                },
-                "详情"
-              )
-            ]);
-          }
-        }
+          title: "备注",
+          key: "info"
+        },
+         {
+          title: "联系人电话",
+          key: "phone"
+        },
+        {
+          title: "录入时间",
+          key: "createTime"
+        },
       ]
     };
   },
   methods: {
     getList() {
       this.isLoading = true;
-      getNoticeList(this.filter).then(
+      companyList(this.filter).then(
         res => {
           this.isLoading = false;
           this.pData = res.data.rows;

@@ -54,7 +54,7 @@
         <!-- <li><router-link to="/">网站导航</router-link></li> -->
         <!-- <li><router-link to="/freeback">意见反馈</router-link></li> -->
         <li><router-link to="/">商城首页</router-link></li>
-        <li><router-link to="/">供货商目录</router-link></li>
+        <li><router-link to="/companyList">供货商目录</router-link></li>
       </ul>
     </div>
   </div>

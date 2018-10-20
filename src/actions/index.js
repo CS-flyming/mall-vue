@@ -50,3 +50,7 @@ export function takeProduct(id) {
 export function editProNum(params) {
   return $axios.post("product/car/edit", params);
 }
+//供货商目录
+export function companyList(params) {
+  return $axios.post("company/list", params);
+}

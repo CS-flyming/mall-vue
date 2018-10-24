@@ -16,12 +16,13 @@
               <div class="remarks-title">
                 <span>规格参数</span>
               </div>
-              <div class="item-param-container">
-                <span class="item-param-box" v-for="(value,key) in param" :key="key">
-                  <span class="item-param-title">{{key}}: </span>
-                  <span class="item-param-content">{{value}}</span>
-                </span>
-              </div>
+              <dl class="item-param-container">
+                <dl class="item-param-box" v-for="(value,key) in param" :key="key">
+          
+                  <dt class="item-param-title">{{key}} </dt>
+                  <dd class="item-param-content">{{value}}</dd>
+                </dl>
+              </dl>
             </TabPane>
           </Tabs>
         <!-- </div> -->
@@ -171,26 +172,40 @@ export default {
 }
 /************* 商品参数 *************/
 .item-param-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-between;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
 }
 .item-param-box {
-  padding: 5px;
-  padding-left: 5px;
-  width: auto;
-  height: auto;
-  font-size: 14px;
-  /* text-align: center; */
-  /* background-color: #ccc; */
+  position: relative;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  line-height: 2.2;
+  clear: both;
 }
 .item-param-title {
+  display: block;
   color: #232323;
+  width: 300px;
+  font-size: 14px;
+  float: left;
+  text-align: right;
+  padding-right: 30px;
 }
 .item-param-content {
+   font-size: 14px;
+  display: block;
+  margin-inline-start: 40px;
+  margin-left: 350px;
   color: #999;
+  word-break:break-all;
 }
+
 .remarks-title {
   padding-left: 15px;
   height: 36px;

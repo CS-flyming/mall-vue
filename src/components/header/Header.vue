@@ -77,8 +77,11 @@ export default {
   },
   methods: {
     signOutFun() {
-      localStorage.clear();
-      window.location.reload();
+            Cookies.remove("user");
+            Cookies.remove("token");
+            Cookies.remove("access");       
+            localStorage.clear();        
+            window.location.reload();
     }
   },
   watch: {

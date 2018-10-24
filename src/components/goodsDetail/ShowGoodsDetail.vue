@@ -178,9 +178,9 @@ export default {
 }
 .item-param-box {
   padding: 5px;
-  padding-left: 30px;
-  width: 240px;
-  height: 36px;
+  padding-left: 5px;
+  width: auto;
+  height: auto;
   font-size: 14px;
   /* text-align: center; */
   /* background-color: #ccc; */

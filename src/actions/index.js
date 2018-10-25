@@ -62,9 +62,15 @@ export function takeProduct(id) {
 export function editProNum(params) {
   return $axios.post("product/car/edit", params);
 }
+
 export function getNoticeDetail(id) {
   return $axios.post(`/notice/detail/${id}`);
 }
 export function getNoticeList(params) {
   return $axios.post(`/notice/list`,params);
+}
+
+export function companyList(params) {
+  return $axios.post("company/list", params);
+
 }

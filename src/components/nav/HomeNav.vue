@@ -286,6 +286,7 @@ export default {
   font-size: 17px;
   line-height: 26px;
   white-space: pre;
+  color:black;
 }
 .nav-side li:hover {
   background: #f6f6f6;

@@ -174,48 +174,35 @@ export default {
       columns: [
         {
           type: "selection",
-          width: 58,
+          width: 60,
           align: "center"
         },
         {
-          title: "图片",
-          key: "img",
-          width: 86,
-          render: (h, params) => {
-            return h("div", [
-              h("img", {
-                attrs: {
-                  src:
-                    params.row.product.file &&
-                    params.row.product.file.url + "?type=small"
-                },
-                style: {
-                  width: "48px",
-                  height: "48px"
-                }
-              })
-            ]);
-          },
+          title: "序号",
+          type: "index",
+          width: 80,
           align: "center"
         },
-        {
-          title: "物品简述",
-          key: "info",
+         {
+          title: "名称",
+          key: "value",
+          width: 240,
+           align: "center",
           render: (h, params) => {
             let str = "";
-            str = `商品名称：${params.row.product.name}/规格：${
-              params.row.product.standard
-            }/型号：${params.row.product.model}`;
+            str = `${params.row.product.name}`;
             return h("div", str);
           }
         },
-        {
+          {
           title: "数量",
+         
           // key: "num",
-          align: "center",
+          //align: "center",
           render: (h, params) => {
             return h("InputNumber", {
               props: {
+                
                 min: 1,
                 value: params.row.num
               },
@@ -233,9 +220,49 @@ export default {
           }
         },
         {
+          title: "单价",
+          key: "value",
+          width: 80,
+          render: (h, params) => {
+            let str = "";
+            str = `${params.row.product.value}`;
+            return h("div", str);
+          }
+        },
+        {
+          title: "小计",
+          key: "zj",
+         width: 120,
+         render: (h, params) => {
+            let str = "";
+             return h("InputNumber", {
+              props: {
+                readonly:true,
+                min: 1,
+                value: params.row.num*params.row.product.value
+              },
+              on: {
+                "on-change": val => {
+                  editProNum({
+                    id: params.row.id,
+                    num: val
+                  }).then(res => {
+                    this.loadShoppingCart();
+                  });
+                }
+              }
+            });
+          }
+        },
+
+       
+      
+      
+        {
           title: "经费类型",
           key: "typeDesc",
-          align: "center"
+          align: "center",
+          width:100
         },
         {
           title: "操作",

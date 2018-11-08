@@ -3,24 +3,16 @@
     <Card class="filter-wrap">
         <Form @submit.native.prevent="handleFilter" :model="filter" ref="filterForm" label-position="right" :label-width="120" >
             <Row>
-              <Col span="8">
-                <FormItem label="采购类型">
-                    <Select v-model="filter.type" clearable>
-                        <Option value="1">集中采购</Option>
-                        <Option value="2">自行采购</Option>
-                    </Select>
+                <Col span="7">
+             <FormItem label="开始时间" prop="startTime">
+                    <DatePicker v-model="filter.startTime"  format="yyyy-MM-dd"   type="date"  placeholder="选择开始时间" style="width: 100%;"></DatePicker>
                 </FormItem>
-              </Col>
-              <Col span="8">
-                 <FormItem label="紧急程度">
-                      <Select v-model="filter.level" clearable>
-                          <Option value="1">月度上报</Option>
-                          <Option value="2">紧急购买</Option>
-                      </Select>
-                  </FormItem>
-              </Col>
-               <Col span="8">
-                  <FormItem label="订单状态">
+                <FormItem label="结束时间" prop="endTime">
+                    <DatePicker v-model="filter.endTime"  format="yyyy-MM-dd"   type="date"  placeholder="选择结束时间" style="width: 100%;"></DatePicker>
+                </FormItem>     
+                </Col>
+                 <Col span="7">
+                <FormItem label="订单状态">
                       <Select v-model="filter.status" clearable>
                           <Option value="1">初审中</Option>
                           <Option value="2">复审中</Option>
@@ -30,7 +22,7 @@
                       </Select>
                   </FormItem>
               </Col>
-               <Col span="8">
+               <Col span="4">
                 <FormItem class="submit">
                     <Button type="primary" html-type="submit">筛选</Button>
                 </FormItem>
@@ -39,7 +31,7 @@
             
         </Form>
     </Card>
-    <Table border :columns="columns" :data="data" size="large" no-data-text="你还有订单，快点去购物吧"></Table>
+    <Table border :columns="columns" :data="data" size="default" no-data-text="你还有订单，快点去购物吧"></Table>
     <div class="page-size">
       <pagination :total="total" :limit.sync="filter.limit" :offset.sync="filter.offset" @on-load="loadData"></pagination>
     </div>
@@ -109,34 +101,29 @@ export default {
         {
           title: "订单号",
           key: "orderNo",
-          width: 280,
+          width: 170,
           align: "center"
         },
         {
-          title: "紧急程度",
-          key: "levelDesc"
-        },
-        {
-          title: "采购类型",
-          key: "typeDesc"
-        },
-        {
-          title: "订单类型",
-          key: "normalDesc"
+          title: "金额",
+          key: "zj",
+          
         },
         {
           title: "状态",
-          key: "statusDesc"
+          key: "statusDesc",
+           width: 410
         },
         {
           title: "提交时间",
-          width: 180,
+          width: 110,
           key: "createTime",
           align: "center"
         },
         {
           title: "操作",
-          width: 200,
+          width: 100,
+          align:"center",
           render: (h, params) => {
             let sh =
               params.row.status == "5"
@@ -187,7 +174,7 @@ export default {
                     }
                   }
                 },
-                "订单详情"
+                "导出"
               ),
               sh
             ]);
@@ -199,7 +186,9 @@ export default {
         offset: 0,
         status: "",
         level: "",
-        type: ""
+        type: "",
+        startTime:"",
+        endTime:""
       },
       selectOrder: [],
       showDetailModalFlag: false

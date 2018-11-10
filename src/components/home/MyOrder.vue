@@ -50,6 +50,7 @@
 <script>
 import pagination from "@/components/pagination";
 import { getOrderInList, getOrderDetail, takeProduct,exportOrder } from "@/actions/index";
+import $axios from "../../util";
 export default {
   name: "MyOrder",
   components: {
@@ -169,7 +170,7 @@ export default {
                   },
                   on: {
                     click: () => {
-                      window.location.href= axios.defaults.baseURL+"/export/order/my"+params.row.id;
+                       window.location.href= $axios.defaults.baseURL+"/export/order/my/"+params.row.id;
                       //exportOrder(params.row.id);
                     }
                   }

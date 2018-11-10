@@ -4,6 +4,7 @@ import qs from "qs";
 import Vue from "vue";
 export const ApiUrl = "http://106.14.180.49:9008";
 // export const ApiUrl = "http://192.168.0.105:9001";
+ //export const ApiUrl = "http://127.0.0.1:9001";
 import Cookies from "js-cookie";
 axios.defaults.baseURL = ApiUrl;
 // axios.defaults.withCredentials = true;
@@ -77,3 +78,5 @@ axios.interceptors.response.use(
 );
 const $axios = axios;
 export default $axios;
+
+

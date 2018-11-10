@@ -74,3 +74,7 @@ export function companyList(params) {
   return $axios.post("company/list", params);
 
 }
+
+export function exportOrder(id) {
+  return $axios.post(`export/order/my/${id}`);
+}

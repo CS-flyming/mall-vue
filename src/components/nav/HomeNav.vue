@@ -130,7 +130,7 @@
                          
                         <router-link style="color:#666;"  :to="{path:'/goodsDetail',query:{id:item2.productId,prcode:item2.code,prname:item2.name}}">
                           <Row>
-                            <Col span="20">{{item2.name}}</Col>
+                            <Col span="20" class="line-limit-length" :title=item2.name >{{item2.name}}</Col>
                             <Col span="4" style="color:#57a3f3;"><Icon type="android-star-outline"></Icon>{{item2.num}}</Col>
                           </Row>
                         </router-link>
@@ -517,6 +517,11 @@ export default {
   height: 470px;
   margin-top: 15px;
   background-color: #fff;
+}
+.line-limit-length {
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap; 
 }
 .item-class-head {
   width: 100%;

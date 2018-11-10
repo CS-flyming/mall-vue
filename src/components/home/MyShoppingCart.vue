@@ -14,10 +14,10 @@
                       <Radio label="2">紧急购买</Radio>
                   </RadioGroup>
               </FormItem>
-              <FormItem label="采购类型：" :required="true">
-                  <RadioGroup v-model="bzForm.type">
-                      <Radio label="1">集中采购</Radio>
-                      <Radio label="2">自行采购</Radio>
+             <FormItem label="经费类型" prop="type">
+                  <RadioGroup v-model="fbzItem.type">
+                      <Radio label="5">装备经费</Radio>
+                      <Radio label="6">后勤经费</Radio>
                   </RadioGroup>
               </FormItem>
           </Form>
@@ -315,7 +315,8 @@ export default {
         },
         {
           key: "name",
-          title: "商品名称"
+          title: "商品名称",
+           align: "left"
         },
         {
           key: "standard",

@@ -3,7 +3,7 @@
     <Card class="filter-wrap">
         <Form @submit.native.prevent="handleFilter" :model="filter" ref="filterForm" label-position="right" :label-width="120" >
             <Row>
-                <Col span="7">
+                <Col span="12">
              <FormItem label="开始时间" prop="startTime">
                     <DatePicker v-model="filter.startTime"  format="yyyy-MM-dd"   type="date"  placeholder="选择开始时间" style="width: 100%;"></DatePicker>
                 </FormItem>
@@ -11,7 +11,7 @@
                     <DatePicker v-model="filter.endTime"  format="yyyy-MM-dd"   type="date"  placeholder="选择结束时间" style="width: 100%;"></DatePicker>
                 </FormItem>     
                 </Col>
-                 <Col span="7">
+                 <Col span="12">
                 <FormItem label="订单状态">
                       <Select v-model="filter.status" clearable>
                           <Option value="1">初审中</Option>
@@ -21,12 +21,11 @@
                           <Option value="6">入库</Option>
                       </Select>
                   </FormItem>
-              </Col>
-               <Col span="4">
-                <FormItem class="submit">
+                  <FormItem class="submit">
                     <Button type="primary" html-type="submit">筛选</Button>
                 </FormItem>
               </Col>
+             
             </Row>
             
         </Form>
@@ -50,7 +49,7 @@
 
 <script>
 import pagination from "@/components/pagination";
-import { getOrderInList, getOrderDetail, takeProduct } from "@/actions/index";
+import { getOrderInList, getOrderDetail, takeProduct,exportOrder } from "@/actions/index";
 export default {
   name: "MyOrder",
   components: {
@@ -101,7 +100,7 @@ export default {
         {
           title: "订单号",
           key: "orderNo",
-          width: 170,
+          width: 140,
           align: "center"
         },
         {
@@ -112,18 +111,18 @@ export default {
         {
           title: "状态",
           key: "statusDesc",
-           width: 410
+           width: 300
         },
         {
           title: "提交时间",
-          width: 110,
+          width: 150,
           key: "createTime",
           align: "center"
         },
         {
           title: "操作",
-          width: 100,
-          align:"center",
+          width: 200,
+          align:"left",
           render: (h, params) => {
             let sh =
               params.row.status == "5"
@@ -170,7 +169,8 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.showDetailModal(params.row.id);
+                      window.location.href= axios.defaults.baseURL+"/export/order/my"+params.row.id;
+                      //exportOrder(params.row.id);
                     }
                   }
                 },

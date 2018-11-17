@@ -14,10 +14,10 @@
                       <Radio label="2">紧急购买</Radio>
                   </RadioGroup>
               </FormItem>
-             <FormItem label="经费类型" prop="type">
-                  <RadioGroup v-model="fbzItem.type">
-                      <Radio label="5">装备经费</Radio>
-                      <Radio label="6">后勤经费</Radio>
+              <FormItem label="采购类型：" :required="true">
+                  <RadioGroup v-model="bzForm.type">
+                      <Radio label="1">集中采购</Radio>
+                      <Radio label="2">自行采购</Radio>
                   </RadioGroup>
               </FormItem>
           </Form>
@@ -187,7 +187,7 @@ export default {
           title: "名称",
           key: "value",
           width: 240,
-           align: "center",
+           align: "left",
           render: (h, params) => {
             let str = "";
             str = `${params.row.product.name}`;
@@ -196,6 +196,7 @@ export default {
         },
           {
           title: "数量",
+           align: "center",
          
           // key: "num",
           //align: "center",
@@ -222,6 +223,7 @@ export default {
         {
           title: "单价",
           key: "value",
+           align: "center",
           width: 80,
           render: (h, params) => {
             let str = "";
@@ -232,32 +234,15 @@ export default {
         {
           title: "小计",
           key: "zj",
-         width: 120,
-         render: (h, params) => {
+          align: "center",        
+          width: 80,
+            render: (h, params) => {
             let str = "";
-             return h("InputNumber", {
-              props: {
-                readonly:true,
-                min: 1,
-                value: params.row.num*params.row.product.value
-              },
-              on: {
-                "on-change": val => {
-                  editProNum({
-                    id: params.row.id,
-                    num: val
-                  }).then(res => {
-                    this.loadShoppingCart();
-                  });
-                }
-              }
-            });
+            str = `${params.row.product.value}`*`${params.row.num}`;
+            return h("div", str)
           }
-        },
-
-       
-      
-      
+        
+        },    
         {
           title: "经费类型",
           key: "typeDesc",

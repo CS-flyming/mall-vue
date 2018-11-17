@@ -107,12 +107,15 @@ export default {
         {
           title: "金额",
           key: "zj",
+           width: 100,
+           align: "center"
           
         },
         {
           title: "状态",
           key: "statusDesc",
-           width: 300
+           width: 350,
+            align: "center"
         },
         {
           title: "提交时间",
@@ -149,7 +152,7 @@ export default {
                         "Button",
                         {
                           style: {
-                            margin: "0 5px"
+                            margin: "0 10px"
                           },
                           props: {
                             type: "error",
@@ -161,10 +164,12 @@ export default {
                     ]
                   )
                 : "";
-            return h("div", [
+          return h("div", [
               h(
                 "Button",
-                {
+                { style: {
+                        margin: "0 5px"
+                      },
                   props: {
                     type: "primary"
                   },
@@ -177,9 +182,25 @@ export default {
                 },
                 "导出"
               ),
+               h(
+                "Button",
+                {
+                  props: {
+                    type: "primary"
+                  
+                  },
+                  on: {
+                    click: () => {
+                      this.showDetailModal(params.row.id);
+                    }
+                  }
+                },
+                "订单"
+              ),
               sh
             ]);
-          }
+          },
+      
         }
       ],
       filter: {

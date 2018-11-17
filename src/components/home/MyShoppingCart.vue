@@ -186,8 +186,8 @@ export default {
          {
           title: "名称",
           key: "value",
-          width: 240,
-           align: "left",
+          
+           align: "center",
           render: (h, params) => {
             let str = "";
             str = `${params.row.product.name}`;
@@ -197,15 +197,18 @@ export default {
           {
           title: "数量",
            align: "center",
-         
+          width: 100,
           // key: "num",
           //align: "center",
           render: (h, params) => {
             return h("InputNumber", {
               props: {
-                
+               
                 min: 1,
                 value: params.row.num
+              },
+              style:{
+                 width:"60px"
               },
               on: {
                 "on-change": val => {

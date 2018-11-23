@@ -70,29 +70,37 @@ export default {
         },
         {
           title: "规格",
+            align: "center",
+             width:100,
           render: (h, params) => {
             return h("div", params.row.product.standard || "--");
           }
         },
         {
           title: "型号",
+            align: "center",
+             width:100,
           render: (h, params) => {
             return h("div", params.row.product.model || "--");
           }
         },
         {
           title: "价格",
+           width:100,
+             align: "center",
           render: (h, params) => {
             return h("div", params.row.product.value || "--");
           }
         },
         {
-          title: "采购数量",
+          title: "数量",
+          width:80,
           key: "num",
           align: "center"
         },
         {
           title: "经费类型",
+           width:100,
           key: "typeDesc",
           align: "center"
         }
@@ -126,7 +134,7 @@ export default {
         {
           title: "操作",
           width: 200,
-          align:"left",
+          align:"center",
           render: (h, params) => {
             let sh =
               params.row.status == "5"
@@ -195,7 +203,7 @@ export default {
                     }
                   }
                 },
-                "订单"
+                "详情"
               ),
               sh
             ]);

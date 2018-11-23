@@ -18,10 +18,13 @@
         </div>
         <div class="item-detail-tag">
           <p>
-            <span >【{{pData.typeDesc}}】</span>
+            <span >{{pData.typeDesc}}</span>
           </p>
           <p>
-            <span >编号【{{pData.code}}】</span>
+            <span >编号:{{pData.code}}</span>
+          </p>
+          <p>
+            <span >供货商:{{pData.companyName}}</span>
           </p>
         </div>
         <div class="item-detail-price-row">
@@ -96,6 +99,7 @@ export default {
       default: function() {
         return {
           id: "",
+          companyName:"",
           name: "",
           value: 0,
           type: "",

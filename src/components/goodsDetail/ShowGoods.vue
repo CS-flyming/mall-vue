@@ -18,7 +18,10 @@
         </div>
         <div class="item-detail-tag">
           <p>
-            <span >【{{pData.typeDesc}}】</span>
+            <span >类型：{{pData.typeDesc}}</span>
+          </p>
+           <p>
+            <span >供货商：{{pData.companyName}}</span>
           </p>
         </div>
         <div class="item-detail-price-row">

@@ -54,3 +54,8 @@ export function editProNum(params) {
 export function companyList(params) {
   return $axios.post("company/list", params);
 }
+
+export function getPrintOrderData(id) {
+  return $axios.post(`/order/print/${id}`);
+}
+

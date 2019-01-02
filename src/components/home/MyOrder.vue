@@ -30,6 +30,17 @@
   min-height: 20px;
   padding: 2px;
 }
+.print-flex-item1 {
+  flex: 1;
+  min-height: 40px;
+  max-width: 60px;
+  padding: 2px;
+}
+.print-flex-item2 {
+  flex: 1;
+  min-height: 40px;
+  padding: 2px;
+}
 .print-border-left {
   border-left: 1px solid #888;
 }
@@ -39,12 +50,17 @@
 .mg-rt-8 {
   margin-right: 8px;
 }
+
+.flex-3 {
+  flex: 0 0 30%;
+  word-break: break-all;
+}
 .flex-1 {
   flex: 0 0 10%;
   word-break: break-all;
 }
-.flex-3 {
-  flex: 0 0 30%;
+.flex-2 {
+  flex: 0 0 25%;
   word-break: break-all;
 }
 .flex-7 {
@@ -112,60 +128,51 @@
       <Table border ref="selection" :columns="columns2" :data="selectOrder" size="large"></Table>
       <div slot="footer"></div>
     </Modal>
-     <Modal
-            v-model="printModal"
-            title="打印预览"
-            @on-ok="print"
-            width="640"
-          >
-          <div id="printMe">
-            <div class="print-content">
-                <div class="print-header">{{printType=='out'?'出库单':'入库单'}}</div>
-                <div class="print-base-info print-flex">
-                  <div class="print-flex-item">{{printType=='out'?'出库单位':'入库单位'}}：{{printData.departName}}</div>
-                  <div class="print-flex-item print-border-left">{{printData.date}}<span class="print-float-right mg-rt-8">订单号：{{printData.orderNo}}</span></div>
-                </div>
-                <div class="print-order-info print-flex">
-                  <div class="print-flex-item flex-1">序号</div>
-                  <div class="print-flex-item  flex-3 print-border-left">名称</div>
-                     <div class="print-flex-item flex-1 print-border-left">数量</div>
-                  <div class="print-flex-item flex-1 print-border-left">理由</div>
-                  <div class="print-flex-item flex-1 print-border-left">供货商</div>
-                </div>
-                <div class="print-order-content print-flex" v-for="item in printData.list" :key="item.xh">
-                  <div class="print-flex-item flex-1">{{item.xh}}</div>
-                  <div class="print-flex-item  flex-3 print-border-left">{{item.name}}</div>
-                  <div class="print-flex-item flex-1 print-border-left">{{item.model}}</div>
-                  <div class="print-flex-item flex-1 print-border-left">{{item.departName}}</div>
-                  <div class="print-flex-item flex-1 print-border-left">{{item.value}}</div>
-                  <div class="print-flex-item flex-1 print-border-left">{{item.num}}</div>
-                  <div class="print-flex-item flex-1 print-border-left">{{item.zj}}</div>
-                  <div class="print-flex-item flex-1 print-border-left">{{item.bz}}</div>
-                </div>
-                <div class="print-order-content print-flex">
-                  <div class="print-flex-item flex-7">合计：</div>
-                  <div class="print-flex-item flex-1 print-border-left">{{printData.num}}</div>
-                  <div class="print-flex-item flex-1 print-border-left">{{printData.zj}}</div>
-                  <div class="print-flex-item flex-1 print-border-left"></div>
-                </div>
-                <div class="print-order-content print-flex">
-                  <div class="print-flex-item">核准数合计（大写）：</div>
-                  <div class="print-flex-item">{{printData.dxzj}}</div>
-                </div>
-                <div class="print-order-content print-flex">
-                  <div class="print-flex-item">股（连）长：</div>
-                  <div class="print-flex-item print-border-left">仓库负责人：</div>
-                  <div class="print-flex-item print-border-left">经办人：</div>
-                </div>
+    <Modal v-model="printModal" title="打印预览" @on-ok="print" width="640">
+      <div id="printMe">
+        <div class="print-content">
+          <div class="print-header">紧急采购物资审批单</div>
+          <div class="print-base-info print-flex">
+            <div class="print-flex-item">{{printType=='out'?'出库单位':'入库单位'}}：{{printData.departName}}</div>
+            <div class="print-flex-item print-border-left">
+              采购日期：
+              <span class="print-float-right mg-rt-8">{{printData.date}}</span>
             </div>
           </div>
-        </Modal>
+          <div class="print-order-info print-flex">
+            <div class="print-flex-item flex-1">序号</div>
+            <div class="print-flex-item flex-3 print-border-left">名称</div>
+            <div class="print-flex-item flex-1 print-border-left">数量</div>
+            <div class="print-flex-item flex-2 print-border-left">理由</div>
+            <div class="print-flex-item flex-2 print-border-left">供货商</div>
+          </div>
+          <div class="print-order-content print-flex" v-for="item in printData.list" :key="item.xh">
+            <div class="print-flex-item flex-1">{{item.xh}}</div>
+            <div class="print-flex-item flex-3 print-border-left">{{item.name}}</div>
+            <div class="print-flex-item flex-1 print-border-left">{{item.sl}}</div>
+            <div class="print-flex-item flex-2 print-border-left">{{item.jjyy}}</div>
+            <div class="print-flex-item flex-2 print-border-left">{{item.ghs}}</div>
+          </div>
+          <div class="print-order-content print-flex">
+            <div class="print-flex-item1">采购部门审批意见</div>
+            <div class="print-flex-item2 print-border-left"></div>
+            <div class="print-flex-item1 print-border-left">财务部门审批意见</div>
+            <div class="print-flex-item2 print-border-left"></div>
+          </div>
+        </div>
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script>
 import pagination from "@/components/pagination";
-import { getOrderInList, getOrderDetail, takeProduct } from "@/actions/index";
+import {
+  getOrderInList,
+  getOrderDetail,
+  takeProduct,
+  getPrintOrderData
+} from "@/actions/index";
 export default {
   name: "MyOrder",
   components: {
@@ -175,26 +182,21 @@ export default {
     return {
       data: [],
       total: 0,
-        printModal: false,
+      printModal: false,
       printType: "out",
       printData: {
         list: [
           {
             xh: "序号",
             name: "名称",
-            model: "型号",
             departName: " 单位",
-            value: "219 单价",
-            num: "数量",
-            zj: "总价",
-            bz: " 备注"
+            ghs: "219 单价",
+            sl: "数量",
+            jjyy: "总价"
           }
         ],
-        date: "",
-        num: "数量合计",
-        zj: "总价合计",
-        orderNo: "订单号",
-        departName: "出库单位"
+        date: "时间",
+        departName: "单位"
       },
       spinShow: false,
       columns2: [
@@ -316,16 +318,6 @@ export default {
                       on: {
                         click: () => {
                           getPrintOrderData(params.row.id).then(res => {
-                            let { list } = res.data;
-                            if (list.length <= 8) {
-                              let dis = 8 - list.length;
-                              for (let i = 0; i < dis; i++) {
-                                list.push([]);
-                              }
-                            }
-                            res.data.dxzj = nzhcn
-                              .toMoney(res.data.zj)
-                              .replace("人民币", "");
                             this.printData = res.data;
                             this.printModal = true;
                           });
@@ -368,7 +360,7 @@ export default {
     };
   },
   methods: {
-     print() {
+    print() {
       this.$htmlToPaper("printMe");
     },
     loadData() {

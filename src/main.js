@@ -7,9 +7,14 @@ import iView from "iview";
 import "iview/dist/styles/iview.css";
 import $axios from "./util";
 import VueLazyload from "vue-lazyload";
-// import VueHtmlToPaper from "./libs/print";
+import VueHtmlToPaper from "./libs/print";
 
-// Vue.use(VueHtmlToPaper, options);
+const options = {
+  name: "_blank",
+  specs: ["fullscreen=yes", "titlebar=yes", "scrollbars=yes"],
+  styles: []
+};
+Vue.use(VueHtmlToPaper, options);
 Vue.use(VueLazyload, {
   preLoad: 1.3,
   error: "/static/img-err.png",

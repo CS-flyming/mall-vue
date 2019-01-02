@@ -58,4 +58,8 @@ export function companyList(params) {
 export function getPrintOrderData(id) {
   return $axios.post(`/order/print/${id}`);
 }
+//招投标
+export function addBid(params) {
+  return $axios.post("/bid/add",params);
+}
 

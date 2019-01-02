@@ -23,6 +23,8 @@ const AddAddress = resolve =>
 const MyOrder = resolve => require(["@/components/home/MyOrder"], resolve);
 const MyShoppingCart = resolve =>
   require(["@/components/home/MyShoppingCart"], resolve);
+const MyBid = resolve =>
+  require(["@/components/home/MyBid"], resolve);
 const Merchant = resolve => require(["@/components/Merchant"], resolve);
 const CompanyList = resolve => require(["@/components/CompanyList"], resolve);
 
@@ -55,6 +57,7 @@ export default new Router({
       name: "ShoppingCart",
       component: ShoppingCart
     },
+    
     {
       path: "/companyList", // 商品详情
       name: "CompanyList",
@@ -108,7 +111,12 @@ export default new Router({
           path: "myShoppingCart",
           name: "MyShoppingCart",
           component: MyShoppingCart
-        }
+        },
+        {
+          path: "myBid", // 商品详情
+          name: "MyBid",
+          component: MyBid
+        },
       ]
     }
   ]

@@ -1,30 +1,27 @@
 <template>
   <div class="container" style="padding-top:51px;">
     <Layout class="layout">
-      <Sider class="side-bar" :style="{height: 'calc(100vh - 35px)', background: '#fff', overflow: 'auto'}" ref="side" :collapsed-width="78">
-        <Menu :active-name="$route.name=='index'?'MyOrder':$route.name" theme="light" width="auto" @on-select="onSelect">
-          <!-- <Submenu name="2">
-            <template slot="title">
-                <Icon type="clipboard"></Icon>
-                <span>购物订单</span>
-            </template>
-            <MenuItem name="myOrder">我的订单</MenuItem>
-          </Submenu>
-          <Submenu name="3">
-            <template slot="title">
-                <Icon type="ios-cart"></Icon>
-                <span>购物车</span>
-            </template>
-            <MenuItem name="myShoppingCart">我的购物车</MenuItem>
-          </Submenu> -->
+      <Sider
+        class="side-bar"
+        :style="{height: 'calc(100vh - 35px)', background: '#fff', overflow: 'auto'}"
+        ref="side"
+        :collapsed-width="78"
+      >
+        <Menu
+          :active-name="$route.name=='index'?'MyOrder':$route.name"
+          theme="light"
+          width="auto"
+          @on-select="onSelect"
+        >
           <MenuItem name="MyOrder">我的订单</MenuItem>
           <MenuItem name="MyShoppingCart">我的购物车</MenuItem>
+          <MenuItem name="MyBid">我的招投标</MenuItem>
         </Menu>
       </Sider>
       <Layout class="layout">
         <!-- <Header :style="{background: '#fff'}">
           <h2>{{activeTitle}}</h2>
-        </Header> -->
+        </Header>-->
         <Content class="content">
           <transition mode="out-in">
             <router-view></router-view>
@@ -45,7 +42,8 @@ export default {
         myAddress: "我的收货地址",
         addAddress: "添加收货地址",
         myOrder: "我的订单",
-        myShoppingCart: "我的购物车"
+        myShoppingCart: "我的购物车",
+        myBid: "我的招投标"
       }
     };
   },

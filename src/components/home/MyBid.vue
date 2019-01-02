@@ -1,73 +1,3 @@
-<style lang="less">
-#printMe {
-  width: 595px;
-  margin: 0 auto;
-  color: #333;
-  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
-}
-.print-content {
-  width: 100%;
-  position: relative;
-  border: 1px solid #888;
-}
-.print-header {
-  font-size: 20px;
-  font-weight: 600;
-  text-align: center;
-  padding: 5px 0;
-}
-.print-base-info,
-.print-order-info,
-.print-order-content {
-  font-size: 12px;
-  border-top: 1px solid #888;
-}
-.print-flex {
-  display: flex;
-}
-.print-flex-item {
-  flex: 1;
-  min-height: 20px;
-  padding: 2px;
-}
-.print-flex-item1 {
-  flex: 1;
-  min-height: 40px;
-  max-width: 60px;
-  padding: 2px;
-}
-.print-flex-item2 {
-  flex: 1;
-  min-height: 40px;
-  padding: 2px;
-}
-.print-border-left {
-  border-left: 1px solid #888;
-}
-.print-float-right {
-  float: right;
-}
-.mg-rt-8 {
-  margin-right: 8px;
-}
-
-.flex-3 {
-  flex: 0 0 30%;
-  word-break: break-all;
-}
-.flex-1 {
-  flex: 0 0 10%;
-  word-break: break-all;
-}
-.flex-2 {
-  flex: 0 0 25%;
-  word-break: break-all;
-}
-.flex-7 {
-  flex: 0 0 70%;
-  word-break: break-all;
-}
-</style>
 <template>
   <div>
     <Card class="filter-wrap">
@@ -111,13 +41,12 @@
               <Button type="primary" html-type="submit">筛选</Button>
             </FormItem>
           </Col>
-          
         </Row>
       </Form>
     </Card>
-     <div slot="extra" @click.prevent="showModal=true">
-            <Button icon="ios-plus" type="primary" >新增</Button>
-      </div>
+    <div slot="extra" @click.prevent="showModal=true">
+      <Button icon="ios-plus" type="primary">新增</Button>
+    </div>
     <Table border :columns="columns" :data="data" size="large"></Table>
     <div class="page-size">
       <pagination
@@ -127,46 +56,70 @@
         @on-load="loadData"
       ></pagination>
     </div>
-  <Modal
-        v-model="showModal"
-        title="添加招投标"
-        @on-cancel="handleCacelModal"
-        >
-        <Form :model="fbzItem" ref="verifyForm" label-position="right" :label-width="120" :rules="rules">
-            <FormItem label="项目名称" prop="name" >
-                <Input v-model="fbzItem.name" placeholder="项目名称"  />
-            </FormItem>
-            <FormItem label="需求部门" prop="departId" >
-              <departCalSelector v-model="fbzItem._departId" :departId.sync="fbzItem.departId" clearable/>
-           </FormItem>
-            <FormItem label="项目需求"  prop="xmxq">
-                <Input v-model="fbzItem.xmxq" style="width:100%;"/>
-            </FormItem>
-            <FormItem label="预算经费" prop="standard" >
-                <Input v-model="fbzItem.planMoney" placeholder="预算经费"  />
-            </FormItem>
-            <FormItem label="备注" prop="info" >
-                <Input v-model="fbzItem.info" placeholder="备注"  />
-            </FormItem>
-            <FormItem label="经费类型" prop="type">
-                  <RadioGroup v-model="fbzItem.type">
-                      <Radio label="5">装备经费</Radio>
-                      <Radio label="6">后勤经费</Radio>
-                  </RadioGroup>
-              </FormItem>
-               <FormItem label="招标方式" prop="method">
-                  <RadioGroup v-model="fbzItem.method">
-                      <Radio label="1">询价</Radio>
-                      <Radio label="2">邀请招标</Radio>
-                       <Radio label="3">公开招标</Radio>
-                      <Radio label="4">单一来源</Radio>
-                       <Radio label="5">竞争性谈判</Radio>
-                  </RadioGroup>
-              </FormItem> 
-        </Form>
-       <div slot="footer">
-              <Button type="primary" @click="addNormal" >确定</Button>
-        </div>
+    <Modal v-model="showModal" title="添加招投标" @on-cancel="handleCacelModal">
+      <Form
+        :model="fbzItem"
+        ref="verifyForm"
+        label-position="right"
+        :label-width="120"
+        :rules="rules"
+      >
+        <FormItem label="项目名称" prop="name">
+          <Input v-model="fbzItem.name" placeholder="项目名称"/>
+        </FormItem>
+        <FormItem label="需求部门" prop="departId">
+          <departCalSelector
+            v-model="fbzItem._departId"
+            :departId.sync="fbzItem.departId"
+            clearable
+          />
+        </FormItem>
+        <FormItem label="项目需求" prop="xmxq">
+          <Input v-model="fbzItem.xmxq" style="width:100%;"/>
+        </FormItem>
+        <FormItem label="预算经费" prop="standard">
+          <Input v-model="fbzItem.planMoney" placeholder="预算经费"/>
+        </FormItem>
+        <FormItem label="备注" prop="info">
+          <Input v-model="fbzItem.info" placeholder="备注"/>
+        </FormItem>
+        <FormItem label="开始时间" prop="startTime">
+          <DatePicker
+            v-model="fbzItem.startTime"
+            format="yyyy-MM-dd"
+            type="date"
+            placeholder="选择开始时间"
+            style="width: 100%;"
+          ></DatePicker>
+        </FormItem>
+        <FormItem label="结束时间" prop="endTime">
+          <DatePicker
+            v-model="fbzItem.endTime"
+            format="yyyy-MM-dd"
+            type="date"
+            placeholder="选择结束时间"
+            style="width: 100%;"
+          ></DatePicker>
+        </FormItem>
+        <FormItem label="经费类型" prop="type">
+          <RadioGroup v-model="fbzItem.type">
+            <Radio label="5">装备经费</Radio>
+            <Radio label="6">后勤经费</Radio>
+          </RadioGroup>
+        </FormItem>
+        <FormItem label="招标方式" prop="method">
+          <RadioGroup v-model="fbzItem.method">
+            <Radio label="1">询价</Radio>
+            <Radio label="2">邀请招标</Radio>
+            <Radio label="3">公开招标</Radio>
+            <Radio label="4">单一来源</Radio>
+            <Radio label="5">竞争性谈判</Radio>
+          </RadioGroup>
+        </FormItem>
+      </Form>
+      <div slot="footer">
+        <Button type="primary" @click="addNormal">确定</Button>
+      </div>
     </Modal>
   </div>
 </template>
@@ -178,24 +131,27 @@ import {
   getOrderInList,
   getOrderDetail,
   takeProduct,
- addBid
+  addBid
 } from "@/actions/index";
 export default {
   name: "MyBid",
   components: {
     pagination,
-  departCalSelector
+    departCalSelector
   },
   data() {
     return {
       data: [],
-        fbzItem: {
+      fbzItem: {
         xmxq: "",
         planMoney: "",
         type: "",
         method: "",
         info: "",
-        departId:""
+        _departId: [],
+        departId: "",
+        startTime: "",
+        endTime: ""
       },
       rules: {
         name: [
@@ -205,39 +161,38 @@ export default {
             trigger: "blur"
           }
         ],
-         xmxq: [
+        xmxq: [
           {
             required: true,
             message: "请输入项目需求",
             trigger: "blur"
           }
         ],
-         type: [
+        type: [
           {
             required: true,
             message: "请选择经费类型",
             trigger: "blur"
           }
         ],
-          planMoney: [
+        planMoney: [
           {
             required: true,
             message: "请输入经费预算",
             trigger: "blur"
           }
         ],
-         method: [
+        method: [
           {
             required: true,
             message: "请选择招标方式",
             trigger: "blur"
           }
         ]
-       
       },
       total: 0,
       showModal: false,
-       columns2: [
+      columns2: [
         {
           title: "商品名称",
           render: (h, params) => {
@@ -301,8 +256,7 @@ export default {
           title: "提交时间",
           key: "createTime",
           align: "center"
-        },
-      
+        }
       ],
       filter: {
         limit: 10,
@@ -316,21 +270,31 @@ export default {
     };
   },
   methods: {
-     handleCacelModal() {
+    handleCacelModal() {
       this.showModal = false;
-      this.fbzItem={};
+        this.restFbzItem();
     },
-     addNormal(){
-       addBid(this.fbzItem).then(
+    addNormal() {
+      addBid(this.fbzItem).then(
         res => {
           this.loading = false;
           this.$Message.success("提交成功");
-          this.showModal=false;
+          this.showModal = false;
+          this.restFbzItem();
         },
-        () => {
-             
-        }
+        () => {}
       );
+    },
+    restFbzItem() {
+      this.fbzItem.xmxq = "";
+      this.fbzItem.planMoney = "";
+      this.fbzItem.type = "";
+      this.fbzItem.method = "";
+      this.fbzItem.info = "";
+      this.fbzItem.departId = "";
+      this.fbzItem.startTime = "";
+      this.fbzItem.endTime = "";
+      this.fbzItem._departId = [];
     },
     loadData() {
       this.loading = true;

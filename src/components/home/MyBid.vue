@@ -136,11 +136,11 @@
             <FormItem label="项目名称" prop="name" >
                 <Input v-model="fbzItem.name" placeholder="项目名称"  />
             </FormItem>
-            <FormItem label="需求部门" prop="value" >
-                <InputNumber v-model="fbzItem.value" style="width:100%;"/>
-            </FormItem>
+            <FormItem label="需求部门" prop="departId" >
+              <departCalSelector v-model="fbzItem._departId" :departId.sync="fbzItem.departId" clearable/>
+           </FormItem>
             <FormItem label="项目需求"  prop="xmxq">
-                <InputNumber v-model="fbzItem.xmxq" style="width:100%;"/>
+                <Input v-model="fbzItem.xmxq" style="width:100%;"/>
             </FormItem>
             <FormItem label="预算经费" prop="standard" >
                 <Input v-model="fbzItem.planMoney" placeholder="预算经费"  />
@@ -173,16 +173,18 @@
 
 <script>
 import pagination from "@/components/pagination";
+import departCalSelector from "@/components/departCalSelector";
 import {
   getOrderInList,
   getOrderDetail,
   takeProduct,
-  getPrintOrderData
+ addBid
 } from "@/actions/index";
 export default {
   name: "MyBid",
   components: {
-    pagination
+    pagination,
+  departCalSelector
   },
   data() {
     return {
@@ -316,10 +318,10 @@ export default {
   methods: {
      handleCacelModal() {
       this.showModal = false;
-      this.bzForm={};
+      this.fbzItem={};
     },
      addNormal(){
-       addBid(this.bzForm).then(
+       addBid(this.fbzItem).then(
         res => {
           this.loading = false;
           this.$Message.success("提交成功");

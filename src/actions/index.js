@@ -58,8 +58,46 @@ export function companyList(params) {
 export function getPrintOrderData(id) {
   return $axios.post(`/order/print/${id}`);
 }
+
+
+/**
+ * 获取单位列表
+ * @param {*} params
+ */
+export function getUnitSelect(params) {
+  return $axios.post(`/select/unit`, params);
+}
+
+
+/**
+ * 获取部门列表
+ * @param {*} params
+ */
+export function getDepartSelect(unitId) {
+  return $axios.post(`/select/depart/${unitId}`);
+}
 //招投标
 export function addBid(params) {
   return $axios.post("/bid/add",params);
+}
+
+export function getBidMyList(params) {
+  return $axios.post("/bid/my/list",params);
+}
+
+export function getBidFirstList(params) {
+  return $axios.post("/bid/first/list",params);
+}
+
+export function getBidSecondList(params) {
+  return $axios.post("/bid/second/list",params);
+}
+
+export function getBidFinishList(params) {
+  return $axios.post("/bid/finish/list",params);
+}
+
+export function verifyBid(params) {
+  return $axios.post("/bid/verify",params);
 }
 

@@ -1,58 +1,165 @@
+<style lang="less">
+#printMe {
+  width: 595px;
+  margin: 0 auto;
+  color: #333;
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+.print-content {
+  width: 100%;
+  position: relative;
+  border: 1px solid #888;
+}
+.print-header {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  padding: 5px 0;
+}
+.print-base-info,
+.print-order-info,
+.print-order-content {
+  font-size: 12px;
+  border-top: 1px solid #888;
+}
+.print-flex {
+  display: flex;
+}
+.print-flex-item {
+  flex: 1;
+  min-height: 20px;
+  padding: 2px;
+}
+.print-border-left {
+  border-left: 1px solid #888;
+}
+.print-float-right {
+  float: right;
+}
+.mg-rt-8 {
+  margin-right: 8px;
+}
+.flex-1 {
+  flex: 0 0 10%;
+  word-break: break-all;
+}
+.flex-3 {
+  flex: 0 0 30%;
+  word-break: break-all;
+}
+.flex-7 {
+  flex: 0 0 70%;
+  word-break: break-all;
+}
+</style>
 <template>
   <div>
     <Card class="filter-wrap">
-        <Form @submit.native.prevent="handleFilter" :model="filter" ref="filterForm" label-position="right" :label-width="120" >
-            <Row>
-              <Col span="8">
-                <FormItem label="采购类型">
-                    <Select v-model="filter.type" clearable>
-                        <Option value="1">集中采购</Option>
-                        <Option value="2">自行采购</Option>
-                    </Select>
-                </FormItem>
-              </Col>
-              <Col span="8">
-                 <FormItem label="紧急程度">
-                      <Select v-model="filter.level" clearable>
-                          <Option value="1">月度上报</Option>
-                          <Option value="2">紧急购买</Option>
-                      </Select>
-                  </FormItem>
-              </Col>
-               <Col span="8">
-                  <FormItem label="订单状态">
-                      <Select v-model="filter.status" clearable>
-                          <Option value="1">初审中</Option>
-                          <Option value="2">复审中</Option>
-                          <Option value="3">拒绝</Option>
-                          <Option value="5">完成</Option>
-                          <Option value="6">入库</Option>
-                      </Select>
-                  </FormItem>
-              </Col>
-               <Col span="8">
-                <FormItem class="submit">
-                    <Button type="primary" html-type="submit">筛选</Button>
-                </FormItem>
-              </Col>
-            </Row>
-            
-        </Form>
+      <Form
+        @submit.native.prevent="handleFilter"
+        :model="filter"
+        ref="filterForm"
+        label-position="right"
+        :label-width="120"
+      >
+        <Row>
+          <Col span="8">
+            <FormItem label="采购类型">
+              <Select v-model="filter.type" clearable>
+                <Option value="1">集中采购</Option>
+                <Option value="2">自行采购</Option>
+              </Select>
+            </FormItem>
+          </Col>
+          <Col span="8">
+            <FormItem label="紧急程度">
+              <Select v-model="filter.level" clearable>
+                <Option value="1">月度上报</Option>
+                <Option value="2">紧急购买</Option>
+              </Select>
+            </FormItem>
+          </Col>
+          <Col span="8">
+            <FormItem label="订单状态">
+              <Select v-model="filter.status" clearable>
+                <Option value="1">初审中</Option>
+                <Option value="2">复审中</Option>
+                <Option value="3">拒绝</Option>
+                <Option value="5">完成</Option>
+                <Option value="6">入库</Option>
+              </Select>
+            </FormItem>
+          </Col>
+          <Col span="8">
+            <FormItem class="submit">
+              <Button type="primary" html-type="submit">筛选</Button>
+            </FormItem>
+          </Col>
+        </Row>
+      </Form>
     </Card>
     <Table border :columns="columns" :data="data" size="large" no-data-text="你还有订单，快点去购物吧"></Table>
     <div class="page-size">
-      <pagination :total="total" :limit.sync="filter.limit" :offset.sync="filter.offset" @on-load="loadData"></pagination>
+      <pagination
+        :total="total"
+        :limit.sync="filter.limit"
+        :offset.sync="filter.offset"
+        @on-load="loadData"
+      ></pagination>
     </div>
     <Spin size="large" fix v-if="spinShow"></Spin>
-    <Modal
-        v-model="showDetailModalFlag"
-        width="800"
-        title="订单详情">
-        <Table border ref="selection" :columns="columns2" :data="selectOrder" size="large" ></Table>
-        <div slot="footer">
-             
-        </div>
+    <Modal v-model="showDetailModalFlag" width="800" title="订单详情">
+      <Table border ref="selection" :columns="columns2" :data="selectOrder" size="large"></Table>
+      <div slot="footer"></div>
     </Modal>
+     <Modal
+            v-model="printModal"
+            title="打印预览"
+            @on-ok="print"
+            width="640"
+          >
+          <div id="printMe">
+            <div class="print-content">
+                <div class="print-header">{{printType=='out'?'出库单':'入库单'}}</div>
+                <div class="print-base-info print-flex">
+                  <div class="print-flex-item">{{printType=='out'?'出库单位':'入库单位'}}：{{printData.departName}}</div>
+                  <div class="print-flex-item print-border-left">{{printData.date}}<span class="print-float-right mg-rt-8">订单号：{{printData.orderNo}}</span></div>
+                </div>
+                <div class="print-order-info print-flex">
+                  <div class="print-flex-item flex-1">序号</div>
+                  <div class="print-flex-item  flex-3 print-border-left">名称</div>
+                     <div class="print-flex-item flex-1 print-border-left">数量</div>
+                  <div class="print-flex-item flex-1 print-border-left">理由</div>
+                  <div class="print-flex-item flex-1 print-border-left">供货商</div>
+                </div>
+                <div class="print-order-content print-flex" v-for="item in printData.list" :key="item.xh">
+                  <div class="print-flex-item flex-1">{{item.xh}}</div>
+                  <div class="print-flex-item  flex-3 print-border-left">{{item.name}}</div>
+                  <div class="print-flex-item flex-1 print-border-left">{{item.model}}</div>
+                  <div class="print-flex-item flex-1 print-border-left">{{item.departName}}</div>
+                  <div class="print-flex-item flex-1 print-border-left">{{item.value}}</div>
+                  <div class="print-flex-item flex-1 print-border-left">{{item.num}}</div>
+                  <div class="print-flex-item flex-1 print-border-left">{{item.zj}}</div>
+                  <div class="print-flex-item flex-1 print-border-left">{{item.bz}}</div>
+                </div>
+                <div class="print-order-content print-flex">
+                  <div class="print-flex-item flex-7">合计：</div>
+                  <div class="print-flex-item flex-1 print-border-left">{{printData.num}}</div>
+                  <div class="print-flex-item flex-1 print-border-left">{{printData.zj}}</div>
+                  <div class="print-flex-item flex-1 print-border-left"></div>
+                </div>
+                <div class="print-order-content print-flex">
+                  <div class="print-flex-item">核准数合计（大写）：</div>
+                  <div class="print-flex-item">{{printData.dxzj}}</div>
+                </div>
+                <div class="print-order-content print-flex">
+                  <div class="print-flex-item">股（连）长：</div>
+                  <div class="print-flex-item print-border-left">仓库负责人：</div>
+                  <div class="print-flex-item print-border-left">经办人：</div>
+                </div>
+            </div>
+          </div>
+        </Modal>
   </div>
 </template>
 
@@ -68,6 +175,27 @@ export default {
     return {
       data: [],
       total: 0,
+        printModal: false,
+      printType: "out",
+      printData: {
+        list: [
+          {
+            xh: "序号",
+            name: "名称",
+            model: "型号",
+            departName: " 单位",
+            value: "219 单价",
+            num: "数量",
+            zj: "总价",
+            bz: " 备注"
+          }
+        ],
+        date: "",
+        num: "数量合计",
+        zj: "总价合计",
+        orderNo: "订单号",
+        departName: "出库单位"
+      },
       spinShow: false,
       columns2: [
         {
@@ -109,7 +237,7 @@ export default {
         {
           title: "订单号",
           key: "orderNo",
-          width: 280,
+          width: 115,
           align: "center"
         },
         {
@@ -126,11 +254,11 @@ export default {
         },
         {
           title: "状态",
+
           key: "statusDesc"
         },
         {
           title: "提交时间",
-          width: 180,
           key: "createTime",
           align: "center"
         },
@@ -174,6 +302,39 @@ export default {
                     ]
                   )
                 : "";
+            let dy =
+              params.row.level == "2"
+                ? h(
+                    "Button",
+                    {
+                      props: {
+                        type: "info"
+                      },
+                      style: {
+                        margin: "0 5px"
+                      },
+                      on: {
+                        click: () => {
+                          getPrintOrderData(params.row.id).then(res => {
+                            let { list } = res.data;
+                            if (list.length <= 8) {
+                              let dis = 8 - list.length;
+                              for (let i = 0; i < dis; i++) {
+                                list.push([]);
+                              }
+                            }
+                            res.data.dxzj = nzhcn
+                              .toMoney(res.data.zj)
+                              .replace("人民币", "");
+                            this.printData = res.data;
+                            this.printModal = true;
+                          });
+                        }
+                      }
+                    },
+                    "打印"
+                  )
+                : "";
             return h("div", [
               h(
                 "Button",
@@ -187,9 +348,10 @@ export default {
                     }
                   }
                 },
-                "订单详情"
+                "详情"
               ),
-              sh
+              sh,
+              dy
             ]);
           }
         }
@@ -206,6 +368,9 @@ export default {
     };
   },
   methods: {
+     print() {
+      this.$htmlToPaper("printMe");
+    },
     loadData() {
       this.loading = true;
       getOrderInList(this.filter).then(res => {

@@ -34,15 +34,15 @@
       <Table border ref="selection2" :columns="columns2" :data="shoppingCart2" size="large" no-data-text="您的购物车没有商品，请先添加商品到购物车再点击提交订单" @on-selection-change="handleBzTable2"></Table>
       <div class="go-to">
         <div class="tb-footer">
-          <Form ref="formInline" :model="bzForm" inline>
+          <Form ref="formInline" :model="fbzForm" inline>
               <FormItem label="紧急程度：" :required="true">
-                  <RadioGroup v-model="bzForm.level">
+                  <RadioGroup v-model="fbzForm.level">
                       <Radio label="1">月度上报</Radio>
                       <Radio label="2">紧急购买</Radio>
                   </RadioGroup>
               </FormItem>
               <FormItem label="采购类型：" :required="true">
-                  <RadioGroup v-model="bzForm.type">
+                  <RadioGroup v-model="fbzForm.type">
                       <Radio label="1">集中采购</Radio>
                       <Radio label="2">自行采购</Radio>
                   </RadioGroup>
@@ -84,6 +84,34 @@
               <Button type="primary" @click="addFbzItem" >添加</Button>
         </div>
     </Modal>
+    <Modal
+        v-model="showJjyy"
+        title="紧急采购原因"
+        @on-cancel="handleCacelJjyy"
+        > <Form :model="jjyy" ref="verifyForm" label-position="right" :label-width="120" :rules="rules">
+       
+          <FormItem label="紧急采购原因" prop="jjyy" >
+                <Input v-model="jjyy.jjyy" placeholder="紧急原因"  />
+            </FormItem>
+          </Form>
+         <div slot="footer">
+              <Button type="primary" @click="addNormal" >提交</Button>
+        </div>
+    </Modal>
+      <Modal
+        v-model="showJjyy2"
+        title="紧急采购原因"
+        @on-cancel="handleCacelJjyy2"
+        > <Form :model="jjyy" ref="verifyForm" label-position="right" :label-width="120" :rules="rules">
+       
+          <FormItem label="紧急采购原因" prop="jjyy" >
+                <Input v-model="jjyy.jjyy" placeholder="紧急原因"  />
+            </FormItem>
+          </Form>
+         <div slot="footer">
+              <Button type="primary" @click="addNoNormal" >提交</Button>
+        </div>
+    </Modal>
   </div>
 </template>
 
@@ -117,6 +145,8 @@ export default {
       loading: false,
       disabled2: true,
       loading2: false,
+      showJjyy: false,
+      showJjyy2: false,
       rules: {
         name: [
           {
@@ -353,19 +383,31 @@ export default {
           }
         }
       ],
-      bzForm: {
+       bzForm: {
         level: "1",
         type: "1",
         products: []
       },
+       jjyy: {
+       jjyy:""
+      },
       fbzForm: {
         level: "1",
         type: "1",
+        jjyy:"",
         products: []
       }
     };
   },
   methods: {
+     handleCacelJjyy2() {
+      this.showJjyy2 = false;
+      this.jjyy.jjyy="";
+    },
+      handleCacelJjyy() {
+      this.showJjyy = false;
+      this.jjyy.jjyy="";
+    },
     handleCacelModal() {
       this.showFbzModal = false;
       this.resetFbzItemForm();
@@ -418,27 +460,47 @@ export default {
     },
     goTo() {
       this.loading = true;
-      addNormalOrder(this.bzForm).then(
+      if(this.bzForm.level=='2'){
+       this.showJjyy=true;
+      }else{
+          this.addNormal();
+      }
+    },
+    goTo2() {
+      this.loading2 = true;
+      if(this.fbzForm.level=='2'){
+       this.showJjyy2=true;
+      }else{
+          this.addNoNormal();
+      }    
+    },
+     addNormal(){
+       this.bzForm.jjyy = this.jjyy.jjyy;
+       addNormalOrder(this.bzForm).then(
         res => {
           this.loading = false;
           this.$Message.success("提交成功");
           this.loadShoppingCart();
+          this.showJjyy=false;
+          this.jjyy.jjyy="";
         },
         () => {
-          this.loading = false;
+          this.loading = false;         
         }
       );
     },
-    goTo2() {
-      this.loading2 = true;
-      addNoNormalOrder(this.fbzForm).then(
+    addNoNormal(){
+       this.fbzForm.jjyy = this.jjyy.jjyy;
+       addNoNormalOrder(this.fbzForm).then(
         res => {
           this.loading2 = false;
           this.$Message.success("提交成功");
           this.shoppingCart2 = [];
+          this.showJjyy2=false;
+           this.jjyy.jjyy="";
         },
         () => {
-          this.loading2 = false;
+          this.loading2 = false;         
         }
       );
     },

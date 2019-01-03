@@ -223,7 +223,8 @@ export default {
         {
           title: "开始时间",
           key: "startTime",
-          align: "center"
+          align: "center",
+          width:120
         },
           {
           title: "结束时间",
@@ -259,6 +260,7 @@ export default {
           this.$Message.success("提交成功");
           this.showModal = false;
           this.restFbzItem();
+           this.loadData();
         },
         () => {}
       );

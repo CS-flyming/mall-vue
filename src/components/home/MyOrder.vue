@@ -269,7 +269,7 @@ export default {
           width: 200,
           render: (h, params) => {
             let sh =
-              params.row.status == "5"
+              params.row.status == "7"
                 ? h(
                     "Poptip",
                     {

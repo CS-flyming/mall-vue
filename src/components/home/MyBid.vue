@@ -9,33 +9,30 @@
         :label-width="120"
       >
         <Row>
-          <Col span="8">
-            <FormItem label="采购类型">
-              <Select v-model="filter.type" clearable>
-                <Option value="1">集中采购</Option>
-                <Option value="2">自行采购</Option>
-              </Select>
-            </FormItem>
-          </Col>
-          <Col span="8">
-            <FormItem label="紧急程度">
-              <Select v-model="filter.level" clearable>
-                <Option value="1">月度上报</Option>
-                <Option value="2">紧急购买</Option>
-              </Select>
-            </FormItem>
-          </Col>
-          <Col span="8">
-            <FormItem label="订单状态">
-              <Select v-model="filter.status" clearable>
-                <Option value="1">初审中</Option>
-                <Option value="2">复审中</Option>
-                <Option value="3">拒绝</Option>
-                <Option value="5">完成</Option>
-                <Option value="6">入库</Option>
-              </Select>
-            </FormItem>
-          </Col>
+            <Col span="8">
+         <FormItem label="项目名称">
+           <Input v-model="filter.name" style="width:100%;"/>
+        </FormItem>
+         </Col>
+           <Col span="8">
+         <FormItem label="经费类型">
+          <Select v-model="filter.type" clearable>
+            <Option value="5">装备经费</Option>
+            <Option value="6">后勤经费</Option>
+          </Select>
+        </FormItem>
+         </Col>
+         <Col span="8">
+        <FormItem label="招标方式">
+          <Select v-model="filter.method" clearable>
+            <Option value="1">询价</Option>
+            <Option value="2">邀请招标</Option>
+            <Option value="3">公开招标</Option>
+            <Option value="4">单一来源</Option>
+            <Option value="5">竞争性谈判</Option>
+          </Select>
+        </FormItem>
+      </Col>
           <Col span="8">
             <FormItem class="submit">
               <Button type="primary" html-type="submit">筛选</Button>
@@ -128,9 +125,7 @@
 import pagination from "@/components/pagination";
 import departCalSelector from "@/components/departCalSelector";
 import {
-  getOrderInList,
-  getOrderDetail,
-  takeProduct,
+  getBidMyList,
   addBid
 } from "@/actions/index";
 export default {
@@ -192,77 +187,60 @@ export default {
       },
       total: 0,
       showModal: false,
-      columns2: [
-        {
-          title: "商品名称",
-          render: (h, params) => {
-            return h("div", params.row.product.name || "--");
-          }
+     
+      columns: [
+         {
+          title: "项目名称",
+          key: "name",
+          align: "center"
         },
         {
-          title: "规格",
-          render: (h, params) => {
-            return h("div", params.row.product.standard || "--");
-          }
+          title: "项目需求",
+          key: "xmxq",
+           align: "center"
         },
         {
-          title: "型号",
-          render: (h, params) => {
-            return h("div", params.row.product.model || "--");
-          }
-        },
-        {
-          title: "价格",
-          render: (h, params) => {
-            return h("div", params.row.product.value || "--");
-          }
-        },
-        {
-          title: "采购数量",
-          key: "num",
+          title: "招标方式",
+          key: "methodDesc",
           align: "center"
         },
         {
           title: "经费类型",
           key: "typeDesc",
           align: "center"
-        }
-      ],
-      columns: [
+        },
         {
-          title: "订单号",
-          key: "orderNo",
-          width: 115,
+          title: "经费预算",
+          key: "planMoney",
           align: "center"
         },
         {
-          title: "紧急程度",
-          key: "levelDesc"
+          title: "需求部门",
+
+          key: "departName",
+          align: "center"
         },
         {
-          title: "采购类型",
-          key: "typeDesc"
+          title: "开始时间",
+          key: "startTime",
+          align: "center"
         },
-        {
-          title: "订单类型",
-          key: "normalDesc"
+          {
+          title: "结束时间",
+          key: "endTime",
+          align: "center"
         },
         {
           title: "状态",
-
-          key: "statusDesc"
-        },
-        {
-          title: "提交时间",
-          key: "createTime",
+          key: "statusDesc",
           align: "center"
         }
       ],
       filter: {
         limit: 10,
         offset: 0,
-        status: "",
-        level: "",
+        name: "",
+        method: "",
         type: ""
       },
       selectOrder: [],
@@ -298,7 +276,7 @@ export default {
     },
     loadData() {
       this.loading = true;
-      getOrderInList(this.filter).then(res => {
+      getBidMyList(this.filter).then(res => {
         this.loading = false;
         this.data = res.data.rows;
         this.total = res.data.total;

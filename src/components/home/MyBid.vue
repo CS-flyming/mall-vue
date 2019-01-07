@@ -271,10 +271,9 @@ export default {
       this.fbzItem.type = "";
       this.fbzItem.method = "";
       this.fbzItem.info = "";
-      this.fbzItem.departId = "";
-      this.fbzItem.startTime = "";
+       this.fbzItem.startTime = "";
       this.fbzItem.endTime = "";
-      this.fbzItem._departId = [];
+    
     },
     loadData() {
       this.loading = true;

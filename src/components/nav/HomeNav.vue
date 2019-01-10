@@ -17,72 +17,6 @@
               </li>
           </template>
           
-          <!-- <li @mouseenter="showDetail(1)" @mouseleave="hideDetail(1)">
-            <span class="nav-side-item">家用电器</span>
-          </li>
-          <li @mouseenter="showDetail(2)" @mouseleave="hideDetail(2)">
-            <span class="nav-side-item">手机</span> /
-            <span class="nav-side-item">运营商</span> /
-            <span class="nav-side-item">数码</span>
-          </li>
-          <li @mouseenter="showDetail(1)" @mouseleave="hideDetail(1)">
-            <span class="nav-side-item">电脑</span> /
-            <span class="nav-side-item">办公</span>
-          </li>
-          <li @mouseenter="showDetail(2)" @mouseleave="hideDetail(2)">
-            <span class="nav-side-item">家居</span> /
-            <span class="nav-side-item">家具</span> /
-            <span class="nav-side-item">家装</span> /
-            <span class="nav-side-item">厨具</span>
-          </li>
-          <li @mouseenter="showDetail(1)" @mouseleave="hideDetail(1)">
-            <span class="nav-side-item">男装</span> /
-            <span class="nav-side-item">女装</span> /
-            <span class="nav-side-item">童装</span> /
-            <span class="nav-side-item">内衣</span>
-          </li>
-          <li @mouseenter="showDetail(2)" @mouseleave="hideDetail(2)">
-            <span class="nav-side-item">美妆个护</span> /
-            <span class="nav-side-item">宠物</span>
-          </li>
-          <li @mouseenter="showDetail(1)" @mouseleave="hideDetail(1)">
-            <span class="nav-side-item">女鞋</span> /
-            <span class="nav-side-item">箱包</span> /
-            <span class="nav-side-item">钟表</span> /
-            <span class="nav-side-item">珠宝</span>
-          </li>
-          <li @mouseenter="showDetail(2)" @mouseleave="hideDetail(2)">
-            <span class="nav-side-item">男鞋</span> /
-            <span class="nav-side-item">运动</span> /
-            <span class="nav-side-item">户外</span>
-          </li>
-          <li @mouseenter="showDetail(1)" @mouseleave="hideDetail(1)">
-            <span class="nav-side-item">汽车</span> /
-            <span class="nav-side-item">汽车用品</span>
-          </li>
-          <li @mouseenter="showDetail(2)" @mouseleave="hideDetail(2)">
-            <span class="nav-side-item">母婴</span> /
-            <span class="nav-side-item">玩具乐器</span>
-          </li>
-          <li @mouseenter="showDetail(1)" @mouseleave="hideDetail(1)">
-            <span class="nav-side-item">食品</span> /
-            <span class="nav-side-item">酒类</span> /
-            <span class="nav-side-item">生鲜</span> /
-            <span class="nav-side-item">特产</span>
-          </li>
-          <li @mouseenter="showDetail(2)" @mouseleave="hideDetail(2)">
-            <span class="nav-side-item">礼品鲜花</span> /
-            <span class="nav-side-item">农资绿植</span>
-          </li>
-          <li @mouseenter="showDetail(1)" @mouseleave="hideDetail(1)">
-            <span class="nav-side-item">医药保健</span> /
-            <span class="nav-side-item">计生情趣</span>
-          </li>
-          <li @mouseenter="showDetail(2)" @mouseleave="hideDetail(2)">
-            <span class="nav-side-item">图书</span> /
-            <span class="nav-side-item">音像</span> /
-            <span class="nav-side-item">电子书</span>
-          </li> -->
         </ul>
       </div>
       <div class="nav-content">
@@ -90,19 +24,10 @@
         <div>
           <Carousel arrow="never" dots="none" :height="560" style="width:985px;">
               <CarouselItem >
-                <!-- <router-link to="/goodsList">-->
-                  <img src="/static/nav3.jpg" style="width:100%;height:100%;">
-                <!-- </router-link> -->
-              </CarouselItem>
+                   <img src="/static/nav3.jpg" style="width:100%;height:100%;">
+               </CarouselItem>
           </Carousel>
         </div>
-        <!-- <div class="nav-show">
-          <div class="nav-show-img" v-for="(item, index) in marketing.activity" :key="index">
-            <router-link to="/goodsList">
-              <img :src="item">
-            </router-link>
-          </div>
-        </div> -->
       </div>
     </div>
 

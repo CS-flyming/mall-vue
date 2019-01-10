@@ -229,7 +229,8 @@ export default {
           {
           title: "结束时间",
           key: "endTime",
-          align: "center"
+          align: "center",
+          width:120
         },
         {
           title: "状态",

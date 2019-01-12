@@ -150,30 +150,20 @@ export default {
     addShoppingCartBtn() {
       this.buyInfo.productId = this.pData.id;
       addToCart(this.buyInfo).then(res => {
-        let _this = this;
-        this.$Modal.confirm({
-          title: "提示",
-          content: "添加购物车成功",
-          onOk() {
-            _this.$router.push({
-              name: "MyShoppingCart"
-            });
-          },
-          okText: "前往购物车"
-        });
+              this.$Message.success("添加成功");
+                 
+        // let _this = this;
+        // this.$Modal.confirm({
+        //   title: "提示",
+        //   content: "添加购物车成功",
+        //   onOk() {
+        //     _this.$router.push({
+        //       name: "MyShoppingCart"
+        //     });
+        //   },
+        //   okText: "前往购物车"
+        // });
       });
-      // const index1 = parseInt(this.selectBoxIndex / 3);
-      // const index2 = this.selectBoxIndex % 3;
-      // const date = new Date();
-      // const goodsId = date.getTime();
-      // const data = {
-      //   goods_id: goodsId,
-      //   title: this.goodsInfo.title,
-      //   count: this.count,
-      //   package: this.goodsInfo.setMeal[index1][index2]
-      // };
-      // this.addShoppingCart(data);
-      // this.$router.push("/shoppingCart");
     }
   }
 };

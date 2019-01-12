@@ -324,7 +324,7 @@ export default {
                         }
                       }
                     },
-                    "打印"
+                    "打印审批单"
                   )
                 : "";
             return h("div", [

@@ -9,7 +9,7 @@
     </div> -->
     <div class="nav-body">
       <!-- 侧边导航 -->
-      <div class="nav-side" ref="navSide">
+      <div class="nav-side" ref="navSide" @mouseenter="hideImg" @mouseleave="showImg">
         <ul>
           <template v-for="(item, index) in navSideArr">
               <li :key="index" @mouseenter="showDetail(index)" @mouseleave="hideDetail(index)">
@@ -19,8 +19,7 @@
           
         </ul>
       </div>
-      <div class="nav-content">
-        <!-- 幻灯片 -->
+      <div class="nav-content" id="img1">
         <div>
           <Carousel arrow="never" dots="none" :height="560" style="width:985px;">
               <CarouselItem >
@@ -34,11 +33,8 @@
     
     <template v-for="(it, index) in navSideArr" >
         <transition name="fade" :key="'fd'+index">
-          <div class="detail-item-panel panel-1" :duration="{ enter: 100, leave: 100 }" v-show="panelActive===index" @mouseenter="showDetail(index)" :ref="'itemPanel'+index" @mouseleave="hideDetail(index)">
-            <!-- <div class="nav-detail-item">
-              <span v-for="(item, index) in panelData1.navTags" :key="index">{{item}} > </span>
-            </div> -->
-            <ul style="padding-top:15px;">
+          <div class="detail-item-panel panel-1" :duration="{ enter: 100, leave: 100 }" v-show="panelActive===index" @mouseenter="showDetail1(index)" :ref="'itemPanel'+index" @mouseleave="hideDetail1(index)">
+               <ul style="padding-top:15px;">
               <Row>
                 <template v-if="it.nodes&&it.nodes.length">
                   
@@ -49,10 +45,7 @@
                           <span class="glyphicon glyphicon-menu-right"></span>
                         </span>
                       </router-link>
-                      <!-- <router-link to="/goodsList" v-for="(item, subIndex) in items.nodes" :key="subIndex">
-                        <span class="detail-item">{{item.name}}</span>
-                      </router-link> -->
-                      </Col>
+                   </Col>
                     </li>
                 </template>
                 <template v-else>
@@ -64,23 +57,7 @@
         </transition>
     </template>
     
-    <!-- <transition name="fade">
-      <div class="detail-item-panel panel-2" :duration="{ enter: 100, leave: 100 }" v-show="panel2" @mouseenter="showDetail(2)" ref="itemPanel2" @mouseleave="hideDetail(2)">
-        <div class="nav-detail-item">
-          <span v-for="(item, index) in panelData2.navTags" :key="index">{{item}} > </span>
-        </div>
-        <ul>
-          <li v-for="(items, index) in panelData2.classNav" :key="index" class="detail-item-row">
-            <span class="detail-item-title">{{items.title}}
-              <span class="glyphicon glyphicon-menu-right"></span>
-            </span>
-            <router-link to="/goodsList" v-for="(item, subIndex) in items.tags" :key="subIndex">
-              <span class="detail-item">{{item}}</span>
-            </router-link>
-          </li>
-        </ul>
-      </div>
-    </transition> -->
+ 
     <div class="seckill-content">
               <div class="seckill-item" v-for="(item2, index2) in testArr" :key="index2">
                 <router-link :to="'/goodsDetail?id='+item2.id+'&prcode='+item2.type+'&prname='+item2.typeDesc">
@@ -125,9 +102,24 @@ export default {
     showDetail(index) {
       this.panelActive = index;
     },
+    showDetail1(index) {
+      this.panelActive = index;
+       document.getElementById("img1").style.display="none";
+ 
+    },
+     hideDetail1(index) {
+      this.panelActive = "";
+           document.getElementById("img1").style.display="";
+ 
+    },
+    hideImg() {
+     document.getElementById("img1").style.display="none";
+      },
+    showImg() {
+       document.getElementById("img1").style.display="";
+    },
     hideDetail(index) {
       this.panelActive = "";
-      // index === 1 ? (this.panel1 = false) : (this.panel2 = false);
     },
     getProductList() {
       getProductList().then(res => {

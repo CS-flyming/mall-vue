@@ -67,6 +67,9 @@
             <FormItem label="商品数量"  prop="num">
                 <InputNumber v-model="fbzItem.num" style="width:100%;"  :min="1"/>
             </FormItem>
+             <FormItem label="单位"  prop="unit">
+                <Input v-model="fbzItem.unit" placeholder="单位"/>
+            </FormItem>
             <FormItem label="商品规格" prop="standard" >
                 <Input v-model="fbzItem.standard" placeholder="商品规格"  />
             </FormItem>
@@ -199,7 +202,8 @@ export default {
         num: 1,
         standard: "",
         model: "",
-        type: "5"
+        type: "5",
+        unit:""
       },
       columns: [
         {
@@ -260,6 +264,20 @@ export default {
                 }
               }
             });
+          }
+        },
+         {
+          title: "单位",
+          key: "unit",
+          render: (h, params) => {
+            return h("div",  params.row.product.unit);
+          }
+        },
+         {
+          title: "单价",
+          key: "value",
+          render: (h, params) => {
+            return h("div",  params.row.product.value);
           }
         },
         {
@@ -335,6 +353,11 @@ export default {
         {
           title: "数量",
           key: "num",
+          align: "center"
+        },
+         {
+          title: "单位",
+          key: "unit",
           align: "center"
         },
         {
@@ -419,7 +442,8 @@ export default {
         num: 1,
         standard: "",
         model: "",
-        type: "5"
+        type: "5",
+        unit:""
       };
     },
     handleBzTable(selection) {

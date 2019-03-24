@@ -15,7 +15,7 @@
         >
           <MenuItem name="MyOrder">我的订单</MenuItem>
           <MenuItem name="MyShoppingCart">我的购物车</MenuItem>
-          <MenuItem name="MyBid">我的招投标</MenuItem>
+          <!-- <MenuItem name="MyBid">我的招投标</MenuItem> -->
         </Menu>
       </Sider>
       <Layout class="layout">

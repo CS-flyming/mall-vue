@@ -133,9 +133,11 @@ export default {
       this.$nextTick(() => {
         this.navSideArr.map((v, index) => {
           // console.log(this.$refs.navSide.offsetTop);
-          this.$refs["itemPanel" + index][0].style.left =
+          // console.log( this.$refs.navSide.offsetLeft);
+          //  console.log( this.$refs.navSide.offsetWidth);
+           this.$refs["itemPanel" + index][0].style.left =
             this.$refs.navSide.offsetLeft +
-            this.$refs.navSide.offsetWidth +
+            this.$refs.navSide.offsetWidth-10+
             "px";
 
           this.$refs["itemPanel" + index][0].style.top =
@@ -148,19 +150,7 @@ export default {
   },
   mounted() {},
   updated() {
-    // this.$refs.itemPanel1.style.left =
-    //   this.$refs.navSide.offsetLeft + this.$refs.navSide.offsetWidth + "px";
-    // this.$refs.itemPanel2.style.left =
-    //   this.$refs.navSide.offsetLeft + this.$refs.navSide.offsetWidth + "px";
-    // this.$refs.itemPanel1.style.top = this.$refs.navSide.offsetTop + "px";
-    // this.$refs.itemPanel2.style.top = this.$refs.navSide.offsetTop + "px";
-    // this.navSideArr.map((v, index) => {
-    //   this.$refs["itemPanel" + index][0].style.left =
-    //     this.$refs.navSide.offsetLeft + this.$refs.navSide.offsetWidth + "px";
-    //   this.$refs["itemPanel" + index][0].style.top =
-    //     this.$refs.navSide.offsetTop + "px";
-    // this.$refs.itemPanel2.style.top = this.$refs.navSide.offsetTop + "px";
-    // });
+   
   },
   store
 };
@@ -196,7 +186,7 @@ export default {
   max-width: 1200px;
   height: 560px;
   min-height: 560px;
-  margin: 0px auto;
+  margin: 0px 0px;
 }
 .nav-side {
   width: 200px;

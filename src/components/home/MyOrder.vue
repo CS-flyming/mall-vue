@@ -114,7 +114,8 @@
         </Row>
       </Form>
     </Card>
-    <Table border :columns="columns" :data="data" size="large" no-data-text="你还有订单，快点去购物吧"></Table>
+    <Table border :columns="columns" :data="data" size="large" no-data-text="你还有订单，快点去购物吧">
+    </Table>
     <div class="page-size">
       <pagination
         :total="total"
@@ -126,8 +127,29 @@
     <Spin size="large" fix v-if="spinShow"></Spin>
     <Modal v-model="showDetailModalFlag" width="800" title="订单详情">
       <Table border ref="selection" :columns="columns2" :data="selectOrder" size="large"></Table>
+      <Button type="primary" html-type="submit">收货</Button>
+
       <div slot="footer"></div>
     </Modal>
+
+    <Modal
+            v-model="showVerifyModal5"
+            title="编辑"
+            @on-cancel="handleCacelModal5"
+           >
+           <Form :model="verifyForm5" ref="verifyForm5" label-position="right" :label-width="120" :rules="rules5">
+                <FormItem label="存储位置" prop="location">
+                    <Input v-model="verifyForm5.location" placeholder="存储位置" style="width:100%;"/>
+                </FormItem>
+                <FormItem label="负责人" prop="fzr">
+                     <Input v-model="verifyForm5.fzr" placeholder="负责人" style="width:100%;"/>
+                </FormItem>
+            </Form>
+            <div slot="footer">
+                  <Button type="primary" @click="handleVerifyFirst5" :loading="modalLoading5">确定</Button>
+            </div>
+        </Modal>
+        
     <Modal v-model="printModal" title="打印预览" @on-ok="print" width="640">
       <div id="printMe">
         <div class="print-content">
@@ -198,6 +220,10 @@ export default {
         date: "时间",
         departName: "单位"
       },
+      shForm:{
+        id:"",
+        gdzcList:[]
+      },
       spinShow: false,
       columns2: [
         {
@@ -239,6 +265,33 @@ export default {
           title: "经费类型",
           key: "typeDesc",
           align: "center"
+        },
+       {
+          type: "action",
+          title: "操作",
+          align: "center",
+          render: (h, params) => {          
+          let infobtn = 
+             params.row.product.gdzc == 1?   h(
+                "Button",
+                {
+                  props: {
+                    type: "info"
+                  },
+                   style: { margin: "0 5px" },
+                  on: {
+                    click: () => {
+                      // this.showDetailModal(params.row.id);
+                     
+                    }
+                  }
+                },
+               "录入"
+              ): ""; 
+            return h("div", [
+               infobtn
+            ]);
+          }
         }
       ],
       columns: [
@@ -274,42 +327,6 @@ export default {
           title: "操作",
           width: 200,
           render: (h, params) => {
-            let sh =
-              params.row.status == "7"
-                ? h(
-                    "Poptip",
-                    {
-                      props: {
-                        confirm: true,
-                        title: "您确定要收货?",
-                        transfer: true
-                      },
-                      on: {
-                        "on-ok": () => {
-                          takeProduct(params.row.id).then(res => {
-                            this.$Message.success("收货成功");
-                            this.handleFilter();
-                          });
-                        }
-                      }
-                    },
-                    [
-                      h(
-                        "Button",
-                        {
-                          style: {
-                            margin: "0 5px"
-                          },
-                          props: {
-                            type: "error",
-                            placement: "top"
-                          }
-                        },
-                        "收货"
-                      )
-                    ]
-                  )
-                : "";
             let dy =
               params.row.level == "2"
                 ? h(
@@ -348,7 +365,6 @@ export default {
                 },
                 "详情"
               ),
-              sh,
               dy
             ]);
           }

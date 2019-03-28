@@ -124,11 +124,15 @@
       ></pagination>
     </div>
     <Spin size="large" fix v-if="spinShow"></Spin>
-    <Modal v-model="showDetailModalFlag" width="800" title="订单详情">
+    <Modal v-model="showDetailModalFlag" width="800" title="收货">
       <Table border ref="selection" :columns="columns2" :data="selectOrder" size="large"></Table>
       <div slot="footer">
         <Button type="primary" @click="shOrder" v-if="shForm.status=='7'">收货</Button>
       </div>
+    </Modal>
+    <Modal v-model="showDetailModalDetail" width="800" title="订单详情">
+      <Table :columns="columns3" :data="selectOrder"></Table>
+      <div slot="footer"></div>
     </Modal>
 
     <Modal v-model="showVerifyModal5" title="编辑" @on-cancel="handleCacelModal5">
@@ -296,8 +300,10 @@ export default {
           title: "操作",
           align: "center",
           render: (h, params) => {
+            let isvalidate =this.validateCurrent(params.row.product.id);
+            console.log(isvalidate);
             let infobtn =
-              params.row.product.gdzc == 1 && this.shForm.status == 7
+              params.row.product.gdzc == 1 && this.shForm.status == 7 && isvalidate
                 ? h(
                     "Button",
                     {
@@ -317,6 +323,48 @@ export default {
                 : "";
             return h("div", [infobtn]);
           }
+        }
+      ],
+      columns3: [
+        {
+          title: "商品名称",
+          render: (h, params) => {
+            return h("div", params.row.product.name || "--");
+          }
+        },
+        {
+          title: "规格",
+          render: (h, params) => {
+            return h("div", params.row.product.standard || "--");
+          }
+        },
+        {
+          title: "型号",
+          render: (h, params) => {
+            return h("div", params.row.product.model || "--");
+          }
+        },
+        {
+          title: "价格",
+          render: (h, params) => {
+            return h("div", params.row.product.value || "--");
+          }
+        },
+        {
+          title: "采购数量",
+          key: "num",
+          align: "center"
+        },
+        {
+          title: "单位",
+          render: (h, params) => {
+            return h("div", params.row.product.unit || "--");
+          }
+        },
+        {
+          title: "经费类型",
+          key: "typeDesc",
+          align: "center"
         }
       ],
       columns: [
@@ -375,6 +423,28 @@ export default {
                     "打印审批单"
                   )
                 : "";
+            let sh =
+              params.row.status == "7"
+                ? h(
+                    "Button",
+                    {
+                      props: {
+                        type: "primary"
+                      },
+                      style: {
+                        margin: "0 5px"
+                      },
+                      on: {
+                        click: () => {
+                          this.shForm.id = params.row.id;
+                          this.shForm.status = params.row.status;
+                          this.showDetailModal();
+                        }
+                      }
+                    },
+                    "收货"
+                  )
+                : "";
             return h("div", [
               h(
                 "Button",
@@ -382,17 +452,21 @@ export default {
                   props: {
                     type: "primary"
                   },
+                  style: {
+                    margin: "0 5px"
+                  },
                   on: {
                     click: () => {
                       this.shForm.id = params.row.id;
                       this.shForm.status = params.row.status;
-                      this.showDetailModal();
+                      this.HandleDetailModalDetail();
                     }
                   }
                 },
                 "详情"
               ),
-              dy
+              dy,
+              sh
             ]);
           }
         }
@@ -405,7 +479,8 @@ export default {
         type: ""
       },
       selectOrder: [],
-      showDetailModalFlag: false
+      showDetailModalFlag: false,
+      showDetailModalDetail: false
     };
   },
   methods: {
@@ -441,6 +516,19 @@ export default {
       this.verifyForm5.fzr = "";
       this.showVerifyModal5 = false;
     },
+    HandleDetailModalDetail() {
+      this.spinShow = true;
+      getOrderDetail(this.shForm.id).then(
+        res => {
+          this.spinShow = false;
+          this.selectOrder = res.data;
+          this.showDetailModalDetail = true;
+        },
+        () => {
+          this.spinShow = false;
+        }
+      );
+    },
     showDetailModal() {
       this.spinShow = true;
       getOrderDetail(this.shForm.id).then(
@@ -454,14 +542,26 @@ export default {
         }
       );
     },
+    validateCurrent(id){
+       let flag = true;
+       this.shForm.gdzcList.forEach(element => {
+       if(element.indexOf(id)!=-1){
+         flag = false;
+       }
+     });
+     return flag;
+    },
     shOrder() {
       takeProduct(this.shForm).then(
         res => {
           this.showDetailModalFlag = false;
           this.filter.offset = 0;
           this.loadData();
+          this.$Message.success("收货成功");
         },
-        () => {}
+        () => {
+
+        }
       );
     }
   }
